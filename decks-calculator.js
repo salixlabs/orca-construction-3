@@ -16,27 +16,6 @@ function formatNumber(number) {
     }).format(number);
 }
 
-// Constants for cost calculations
-const COSTS = {
-    wood: {
-        materialPerSqFt: 15,
-        laborPerSqFt: 20
-    },
-    composite: {
-        materialPerSqFt: 30,
-        laborPerSqFt: 25
-    },
-    railing: {
-        materialPerFt: 35,
-        laborPerFt: 25
-    },
-    stairs: {
-        materialPerStep: 100,
-        laborPerStep: 150,
-        stepsPerFoot: 0.75 // Assuming typical 7.5" rise
-    }
-};
-
 function calculateCost() {
     // Get measurements
     const firstFloorSF = parseFloat(document.getElementById('firstFloorSF').value) || 0;
@@ -92,6 +71,7 @@ function calculateCost() {
     if (document.getElementById('rainEscape').checked) {
         optionsTotal += (firstFloorSF + secondFloorSF) * 28;
     }
+
     // Add custom option cost
     const customPrice = parseFloat(document.getElementById('customOptionPrice').value) || 0;
     optionsTotal += customPrice;
@@ -111,6 +91,36 @@ function calculateCost() {
         <p>Number of Steps: ${formatNumber(steps)}</p>
         <p><strong>Total Estimated Cost: ${formatCurrency(totalCost)}</strong></p>
     `;
+}
+
+function resetCalculator() {
+    // Reset all number inputs
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.value = '';
+    });
+
+    // Uncheck all radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Uncheck all checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Clear custom option fields
+    document.getElementById('customOptionText').value = '';
+    document.getElementById('customOptionPrice').value = '';
+
+    // Reset section totals
+    document.getElementById('firstLevelTotal').textContent = formatCurrency(0);
+    document.getElementById('secondLevelTotal').textContent = formatCurrency(0);
+    document.getElementById('railingsTotal').textContent = formatCurrency(0);
+    document.getElementById('optionsTotal').textContent = formatCurrency(0);
+
+    // Clear results
+    document.getElementById('result').innerHTML = '';
 }
 
 // Add event listeners to all inputs
@@ -137,6 +147,12 @@ function initializeAutoCalculate() {
     });
 }
 
+// Initialize calculator when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAutoCalculate();
+    calculateCost();
+});
+
 function checkLogin() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -155,22 +171,13 @@ function checkLogin() {
 // Remove the DOMContentLoaded event listener since we'll initialize after login
 document.removeEventListener('DOMContentLoaded', initializeAutoCalculate);
 
-function resetCalculator() {
-    // Reset all input fields
-    document.getElementById('deckLength').value = '';
-    document.getElementById('deckWidth').value = '';
-    document.querySelector('input[name="deckMaterial"][value="wood"]').checked = true;
-    document.getElementById('railingOption').checked = false;
-    document.getElementById('stairsOption').checked = false;
+// Hide results section
+document.getElementById('resultsSection').style.display = 'none';
 
-    // Hide results section
-    document.getElementById('resultsSection').style.display = 'none';
-
-    // Reset result values
-    document.getElementById('materialsCost').textContent = '$0';
-    document.getElementById('laborCost').textContent = '$0';
-    document.getElementById('totalCost').textContent = '$0';
-}
+// Reset result values
+document.getElementById('materialsCost').textContent = '$0';
+document.getElementById('laborCost').textContent = '$0';
+document.getElementById('totalCost').textContent = '$0';
 
 function calculateDeckCost() {
     // Get deck dimensions
