@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Ventilation Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-container">
+            <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo" class="login-logo">
+            <div class="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button onclick="checkLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+            </div>
+            <h1>Orca Ventilation Calculator</h1>
+            <button id="resetButton" class="reset-button" onclick="resetCalculator()">Reset</button>
+        </header>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Attic Measurements</h2>
+            </div>
+            <div class="form-group">
+                <label for="atticSquareFootage">Total Attic Square Footage:</label>
+                <input type="number" id="atticSquareFootage" required>
+            </div>
+            <div class="form-group">
+                <h3>OR Calculate Square Footage</h3>
+                <div class="dimensions-group">
+                    <div>
+                        <label for="atticLength">Length (ft):</label>
+                        <input type="number" id="atticLength">
+                    </div>
+                    <div class="multiply-symbol">×</div>
+                    <div>
+                        <label for="atticWidth">Width (ft):</label>
+                        <input type="number" id="atticWidth">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Ventilation Requirements</h2>
+            </div>
+            <div class="form-group">
+                <label class="radio-label">
+                    <input type="radio" name="ventRatio" value="150" checked>
+                    <span>1:150 (Recommended)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="ventRatio" value="300">
+                    <span>1:300 (Minimum)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Ventilation Distribution</h2>
+            </div>
+            <div class="form-group">
+                <label class="radio-label">
+                    <input type="radio" name="ventDistribution" value="5050" checked>
+                    <span>50/50 Split (Balanced)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="ventDistribution" value="6040">
+                    <span>60/40 Split (Maximum Intake)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section results-section" id="resultsSection" style="display: none;">
+            <div class="section-header">
+                <h2>Ventilation Results</h2>
+            </div>
+            <div class="results-content">
+                <div class="result-item">
+                    <h3>Required Intake Ventilation:</h3>
+                    <p id="intakeResult">0 sq. in.</p>
+                </div>
+                <div class="result-item">
+                    <h3>Required Exhaust Ventilation:</h3>
+                    <p id="exhaustResult">0 sq. in.</p>
+                </div>
+                <div class="result-item">
+                    <h3>Total Required Ventilation:</h3>
+                    <p id="totalResult">0 sq. in.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="calculateButton" class="calculate-button" onclick="calculateVentilation()">Calculate Ventilation</button>
+        </div>
+    </div>
+
+    <script src="ventilation-calculator.js"></script>
+</body>
+</html> 
