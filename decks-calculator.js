@@ -16,6 +16,27 @@ function formatNumber(number) {
     }).format(number);
 }
 
+// Constants for cost calculations
+const COSTS = {
+    wood: {
+        materialPerSqFt: 15,
+        laborPerSqFt: 20
+    },
+    composite: {
+        materialPerSqFt: 30,
+        laborPerSqFt: 25
+    },
+    railing: {
+        materialPerFt: 35,
+        laborPerFt: 25
+    },
+    stairs: {
+        materialPerStep: 100,
+        laborPerStep: 150,
+        stepsPerFoot: 0.75 // Assuming typical 7.5" rise
+    }
+};
+
 function calculateCost() {
     // Get measurements
     const firstFloorSF = parseFloat(document.getElementById('firstFloorSF').value) || 0;
@@ -135,25 +156,65 @@ function checkLogin() {
 document.removeEventListener('DOMContentLoaded', initializeAutoCalculate);
 
 function resetCalculator() {
-    // Reset all number inputs to empty
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.value = '';
-    });
+    // Reset all input fields
+    document.getElementById('deckLength').value = '';
+    document.getElementById('deckWidth').value = '';
+    document.querySelector('input[name="deckMaterial"][value="wood"]').checked = true;
+    document.getElementById('railingOption').checked = false;
+    document.getElementById('stairsOption').checked = false;
 
-    // Uncheck all radio buttons
-    document.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.checked = false;
-    });
+    // Hide results section
+    document.getElementById('resultsSection').style.display = 'none';
 
-    // Uncheck all checkboxes
-    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
-    });
+    // Reset result values
+    document.getElementById('materialsCost').textContent = '$0';
+    document.getElementById('laborCost').textContent = '$0';
+    document.getElementById('totalCost').textContent = '$0';
+}
 
-    // Clear custom option fields
-    document.getElementById('customOptionText').value = '';
-    document.getElementById('customOptionPrice').value = '';
+function calculateDeckCost() {
+    // Get deck dimensions
+    const length = parseFloat(document.getElementById('deckLength').value);
+    const width = parseFloat(document.getElementById('deckWidth').value);
 
-    // Recalculate to update totals
-    calculateCost();
+    // Validate inputs
+    if (!length || !width || length <= 0 || width <= 0) {
+        alert('Please enter valid deck dimensions.');
+        return;
+    }
+
+    // Get selected material
+    const material = document.querySelector('input[name="deckMaterial"]:checked').value;
+    
+    // Calculate base costs
+    const squareFootage = length * width;
+    let materialsCost = squareFootage * COSTS[material].materialPerSqFt;
+    let laborCost = squareFootage * COSTS[material].laborPerSqFt;
+
+    // Add railing costs if selected
+    if (document.getElementById('railingOption').checked) {
+        const perimeterLength = 2 * (length + width);
+        materialsCost += perimeterLength * COSTS.railing.materialPerFt;
+        laborCost += perimeterLength * COSTS.railing.laborPerFt;
+    }
+
+    // Add stairs costs if selected
+    if (document.getElementById('stairsOption').checked) {
+        // Assume stairs height is 3 feet by default
+        const stairsHeight = 3;
+        const numberOfSteps = Math.ceil(stairsHeight * COSTS.stairs.stepsPerFoot);
+        materialsCost += numberOfSteps * COSTS.stairs.materialPerStep;
+        laborCost += numberOfSteps * COSTS.stairs.laborPerStep;
+    }
+
+    // Calculate total cost
+    const totalCost = materialsCost + laborCost;
+
+    // Display results
+    document.getElementById('materialsCost').textContent = '$' + materialsCost.toLocaleString();
+    document.getElementById('laborCost').textContent = '$' + laborCost.toLocaleString();
+    document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString();
+    
+    // Show results section
+    document.getElementById('resultsSection').style.display = 'block';
 } 
