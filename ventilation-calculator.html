@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orca Ventilation Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+    <style>
+        .logout-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #c4a77d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #b39871;
+        }
+        .site-header {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
     <div id="loginOverlay" class="login-overlay">
@@ -20,6 +47,7 @@
 
     <div class="container">
         <header class="site-header">
+            <button class="logout-button" onclick="logout()">Logout</button>
             <div class="logo">
                 <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
             </div>
@@ -109,5 +137,11 @@
     </div>
 
     <script src="ventilation-calculator.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
 </body>
 </html> 
