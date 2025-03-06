@@ -1,6 +1,14 @@
-## Orca Roofing & Exteriors Decks Calculator
+## Orca Roofing & Exteriors Construction Calculators
 
-This is a simple calculator for estimating the cost of building a deck. It allows you to input the dimensions of the deck and the materials you want to use, and it will calculate the total cost.
+This is a website that will contain a collection of calculators and other web apps for our construction company.
 
 ### Features
 
+- [ ] Deck Calculator
+- [ ] Ventilation Calculator
+- [ ] Financing Calculator
+
+### To Do
+
+- [ ] restart this project by pulling in the old calculator
+- [ ] delete all the newf
