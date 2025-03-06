@@ -97,21 +97,26 @@
         }
         .calculator-button:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 16px rgba(44,82,130,0.2);
+            box-shadow: 0 8px 16px rgba(187,148,91,0.2);
         }
         .calculator-button img {
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             margin-bottom: 1.5rem;
             object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .calculator-button:hover img {
+            opacity: 1;
         }
         .calculator-button h2 {
-            color: #2c5282;
+            color: var(--primary-dark);
             margin: 0 0 1rem 0;
             font-size: 1.5rem;
         }
         .calculator-button p {
-            color: #4a5568;
+            color: var(--text-color);
             margin: 0;
             font-size: 1rem;
             line-height: 1.5;
@@ -162,12 +167,12 @@
         </div>
         <div class="calculator-buttons">
             <a href="decks-calculator.html" class="calculator-button">
-                <img src="Assets/deck-icon.png" alt="Deck Calculator" onerror="this.src='Assets/ORE-horizontal-full.png'">
+                <img src="Assets/ORE-tail.png" alt="Deck Calculator">
                 <h2>Deck Calculator</h2>
                 <p>Calculate costs for deck construction including materials, labor, and additional features.</p>
             </a>
             <a href="ventilation-calculator.html" class="calculator-button">
-                <img src="Assets/ventilation-icon.png" alt="Ventilation Calculator" onerror="this.src='Assets/ORE-horizontal-full.png'">
+                <img src="Assets/ORE-tail.png" alt="Ventilation Calculator">
                 <h2>Ventilation Calculator</h2>
                 <p>Determine the proper ventilation requirements for your attic based on square footage and building codes.</p>
             </a>
