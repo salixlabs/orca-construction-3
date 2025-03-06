@@ -20,7 +20,6 @@
 <body>
     <div class="container">
         <header class="site-header">
-            <button class="logout-button" onclick="logout()">Logout</button>
             <div class="logo">
                 <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
             </div>
@@ -192,11 +191,5 @@
     </div>
 
     <script src="decks-calculator.js"></script>
-    <script>
-        function logout() {
-            localStorage.removeItem('orcaLoggedIn');
-            window.location.href = '/';
-        }
-    </script>
 </body>
 </html> 

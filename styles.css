@@ -34,16 +34,16 @@ body {
 .site-header {
     grid-column: 1 / -1;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
     margin-bottom: 20px;
     position: relative;
+    padding: 10px;
 }
 
 .logo {
-    width: 60px;
-    height: 60px;
+    width: 200px;
+    height: auto;
     flex-shrink: 0;
 }
 
@@ -62,6 +62,7 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    white-space: nowrap;
 }
 
 h2 {
@@ -321,14 +322,19 @@ button:hover {
 }
 
 .reset-button {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: auto;
+    background-color: var(--primary-gold);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
     margin: 0;
-    padding: 6px 12px;
-    font-size: 12px;
+    width: auto;
+}
+
+.reset-button:hover {
+    background-color: var(--primary-dark);
 }
 
 .custom-option {
