@@ -9,6 +9,11 @@
         // Check if logged in
         if (localStorage.getItem('orcaLoggedIn') !== 'true') {
             window.location.href = '/';
+        } else {
+            // Show the container when logged in
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.container').style.display = 'grid';
+            });
         }
     </script>
 </head>
