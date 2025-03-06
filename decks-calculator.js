@@ -92,6 +92,30 @@ function calculateCost() {
     `;
 }
 
+function resetCalculator() {
+    // Reset all number inputs to empty
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.value = '';
+    });
+
+    // Uncheck all radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Uncheck all checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Clear custom option fields
+    document.getElementById('customOptionText').value = '';
+    document.getElementById('customOptionPrice').value = '';
+
+    // Recalculate to update totals
+    calculateCost();
+}
+
 // Add event listeners to all inputs
 function initializeAutoCalculate() {
     // Listen to number inputs
@@ -116,44 +140,8 @@ function initializeAutoCalculate() {
     });
 }
 
-function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    if (username === 'ORE' && password === 'ORE') {
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.querySelector('.container').style.display = 'grid';
-        // Initialize calculator after successful login
-        initializeAutoCalculate();
-        calculateCost();
-    } else {
-        alert('Invalid username or password');
-    }
-}
-
-// Remove the DOMContentLoaded event listener since we'll initialize after login
-document.removeEventListener('DOMContentLoaded', initializeAutoCalculate);
-
-function resetCalculator() {
-    // Reset all number inputs to empty
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.value = '';
-    });
-
-    // Uncheck all radio buttons
-    document.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.checked = false;
-    });
-
-    // Uncheck all checkboxes
-    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
-    });
-
-    // Clear custom option fields
-    document.getElementById('customOptionText').value = '';
-    document.getElementById('customOptionPrice').value = '';
-
-    // Recalculate to update totals
+// Initialize calculator when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAutoCalculate();
     calculateCost();
-} 
+}); 
