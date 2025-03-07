@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Ventilation Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        } else {
+            // Show the container when logged in
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.container').style.display = 'grid';
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <a href="/">
+                    <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+                </a>
+            </div>
+            <h1>Orca Roofing & Exteriors Ventilation Calculator</h1>
+            <button id="resetButton" class="reset-button" onclick="resetCalculator()">Reset</button>
+        </header>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Attic Measurements</h2>
+            </div>
+            <div class="form-group">
+                <label for="atticSF">Total Attic Square Footage:</label>
+                <input type="number" id="atticSF" required>
+            </div>
+            <div class="form-group">
+                <label for="roofPitch">Roof Pitch (e.g., 4:12):</label>
+                <select id="roofPitch" required>
+                    <option value="">Select Pitch</option>
+                    <option value="4">4:12</option>
+                    <option value="5">5:12</option>
+                    <option value="6">6:12</option>
+                    <option value="8">8:12</option>
+                    <option value="10">10:12</option>
+                    <option value="12">12:12</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Current Ventilation</h2>
+                <span class="section-total" id="currentVentTotal">0 sq.in.</span>
+            </div>
+            <div class="form-group">
+                <label class="radio-label">
+                    <input type="checkbox" id="hasRidgeVent">
+                    <span>Ridge Vent</span>
+                </label>
+                <div class="sub-input" id="ridgeVentLength" style="display: none;">
+                    <label>Ridge Vent Length (feet):</label>
+                    <input type="number" id="ridgeVentLF">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="radio-label">
+                    <input type="checkbox" id="hasGableVents">
+                    <span>Gable Vents</span>
+                </label>
+                <div class="sub-input" id="gableVentCount" style="display: none;">
+                    <label>Number of Gable Vents:</label>
+                    <input type="number" id="gableVentNum">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="radio-label">
+                    <input type="checkbox" id="hasSoffitVents">
+                    <span>Soffit Vents</span>
+                </label>
+                <div class="sub-input" id="soffitVentCount" style="display: none;">
+                    <label>Number of Soffit Vents:</label>
+                    <input type="number" id="soffitVentNum">
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Required Ventilation</h2>
+                <span class="section-total" id="requiredVentTotal">0 sq.in.</span>
+            </div>
+            <div class="form-group">
+                <p>Based on building codes, your attic requires:</p>
+                <div id="ventilationRequirements"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Recommended Solutions</h2>
+            </div>
+            <div class="form-group">
+                <div id="recommendations"></div>
+            </div>
+        </div>
+
+        <div class="section cost-summary">
+            <h2>Ventilation Summary</h2>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="ventilation-calculator.js"></script>
+</body>
+</html> 
