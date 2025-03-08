@@ -24,11 +24,21 @@ body {
     margin: 0 auto;
     background-color: var(--background-color);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.top-row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 8px;
+}
+
+.bottom-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 10px;
-    display: none; /* Hide initially */
+    gap: 8px;
 }
 
 .site-header {
@@ -221,6 +231,11 @@ button:hover {
     
     .measurements .form-group {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .top-row,
+    .bottom-row {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -488,4 +503,75 @@ ul {
 
 li {
     margin: 0.25rem 0;
+}
+
+/* Compact measurements section */
+.measurements-section {
+    padding: 8px;
+}
+
+.measurements-section .form-group.compact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-row label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.input-row input,
+.input-row select {
+    flex: 1;
+    min-width: 0;
+}
+
+.conversion-display {
+    font-size: 12px;
+    color: var(--text-color);
+    background-color: var(--primary-light);
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 2px 0;
+}
+
+/* Requirements section */
+.requirements-section {
+    padding: 8px;
+}
+
+.requirements-section ul {
+    margin: 4px 0;
+    padding-left: 1.2rem;
+}
+
+.requirements-section li {
+    margin: 2px 0;
+}
+
+/* Ventilation section */
+.ventilation-section {
+    padding: 8px;
+}
+
+/* Products and Summary sections */
+.products-section,
+.summary-section {
+    padding: 8px;
+}
+
+.summary-section {
+    background-color: var(--primary-light);
+    background-image: url('Assets/ORE-tail.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120px;
+    background-blend-mode: soft-light;
 } 

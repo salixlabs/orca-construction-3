@@ -29,27 +29,41 @@
             <button id="resetButton" class="reset-button" onclick="resetCalculator()">Reset</button>
         </header>
 
-        <div class="section">
-            <div class="section-header">
-                <h2>Attic Measurements</h2>
-            </div>
-            <div class="form-group">
-                <label for="atticSF">Total Attic Square Footage:</label>
-                <input type="number" id="atticSF" required>
-                <div class="conversion-display">
-                    <span id="sqInchesConversion">0 square inches (0 × 144)</span>
+        <div class="top-row">
+            <div class="section measurements-section">
+                <div class="section-header">
+                    <h2>Attic Measurements</h2>
+                </div>
+                <div class="form-group compact">
+                    <div class="input-row">
+                        <label for="atticSF">Total Attic Square Footage:</label>
+                        <input type="number" id="atticSF" required>
+                    </div>
+                    <div class="conversion-display">
+                        <span id="sqInchesConversion">0 square inches (0 × 144)</span>
+                    </div>
+                    <div class="input-row">
+                        <label for="ventRatio">Ventilation Ratio:</label>
+                        <select id="ventRatio" required>
+                            <option value="150">1:150 (Recommended)</option>
+                            <option value="300">1:300 (Minimum)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="ventRatio">Ventilation Ratio:</label>
-                <select id="ventRatio" required>
-                    <option value="150">1:150 (Recommended)</option>
-                    <option value="300">1:300 (Minimum)</option>
-                </select>
+
+            <div class="section requirements-section">
+                <div class="section-header">
+                    <h2>Ventilation Requirements</h2>
+                    <span class="section-total" id="requiredVentTotal">0 sq.in.</span>
+                </div>
+                <div class="form-group">
+                    <div id="ventilationRequirements"></div>
+                </div>
             </div>
         </div>
 
-        <div class="section">
+        <div class="section ventilation-section">
             <div class="section-header">
                 <h2>Existing Ventilation</h2>
             </div>
@@ -130,28 +144,20 @@
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-header">
-                <h2>Ventilation Requirements</h2>
-                <span class="section-total" id="requiredVentTotal">0 sq.in.</span>
+        <div class="bottom-row">
+            <div class="section products-section">
+                <div class="section-header">
+                    <h2>Recommended Products</h2>
+                </div>
+                <div class="form-group">
+                    <div id="recommendations"></div>
+                </div>
             </div>
-            <div class="form-group">
-                <div id="ventilationRequirements"></div>
-            </div>
-        </div>
 
-        <div class="section">
-            <div class="section-header">
-                <h2>Recommended Products</h2>
+            <div class="section summary-section">
+                <h2>Ventilation Summary</h2>
+                <div id="result"></div>
             </div>
-            <div class="form-group">
-                <div id="recommendations"></div>
-            </div>
-        </div>
-
-        <div class="section cost-summary">
-            <h2>Ventilation Summary</h2>
-            <div id="result"></div>
         </div>
     </div>
 
