@@ -7,6 +7,8 @@ const VENT_SPECS = {
     soffit: { nfa: 9 }
 };
 
+const SQFT_TO_SQIN = 144; // Conversion factor: 1 sq ft = 144 sq in
+
 // Helper function to format numbers with commas
 function formatNumber(number) {
     return new Intl.NumberFormat('en-US', {
@@ -16,12 +18,19 @@ function formatNumber(number) {
 }
 
 function calculateVentilation() {
-    // Get attic area
+    // Get attic area and convert to square inches
     const atticSF = parseFloat(document.getElementById('atticSF').value) || 0;
+    const atticSqIn = atticSF * SQFT_TO_SQIN;
+    
+    // Update square inches conversion display
+    document.getElementById('sqInchesConversion').textContent = 
+        `${formatNumber(atticSqIn)} square inches (${formatNumber(atticSF)} × ${SQFT_TO_SQIN})`;
+    
+    // Get ventilation ratio
     const ratio = parseInt(document.getElementById('ventRatio').value);
     
-    // Calculate required ventilation
-    const totalRequired = atticSF * (1/ratio);
+    // Calculate required ventilation (using square inches)
+    const totalRequired = atticSqIn / ratio;
     const exhaustRequired = totalRequired / 2;
     const intakeRequired = totalRequired / 2;
     
@@ -67,7 +76,7 @@ function calculateVentilation() {
     // Update requirements section
     document.getElementById('requiredVentTotal').textContent = formatNumber(totalRequired) + ' sq.in.';
     document.getElementById('ventilationRequirements').innerHTML = `
-        <p>Based on your attic area of ${formatNumber(atticSF)} sq.ft. and a 1:${ratio} ratio:</p>
+        <p>Based on your attic area of ${formatNumber(atticSF)} sq.ft. (${formatNumber(atticSqIn)} sq.in.) and a 1:${ratio} ratio:</p>
         <ul>
             <li>Total Required: ${formatNumber(totalRequired)} sq.in.</li>
             <li>Exhaust Required: ${formatNumber(exhaustRequired)} sq.in.</li>
@@ -112,7 +121,7 @@ function calculateVentilation() {
     // Display summary
     document.getElementById('result').innerHTML = `
         <h3>Ventilation Summary:</h3>
-        <p>Attic Area: ${formatNumber(atticSF)} SF</p>
+        <p>Attic Area: ${formatNumber(atticSF)} sq.ft. (${formatNumber(atticSqIn)} sq.in.)</p>
         <p>Ventilation Ratio: 1:${ratio}</p>
         <p>Total Required: ${formatNumber(totalRequired)} sq.in.</p>
         <p>Current Exhaust: ${formatNumber(totalExhaust)} sq.in. (${Math.round(totalExhaust/exhaustRequired * 100)}% of required)</p>

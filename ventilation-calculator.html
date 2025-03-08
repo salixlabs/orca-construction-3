@@ -36,6 +36,9 @@
             <div class="form-group">
                 <label for="atticSF">Total Attic Square Footage:</label>
                 <input type="number" id="atticSF" required>
+                <div class="conversion-display">
+                    <span id="sqInchesConversion">0 square inches (0 × 144)</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="ventRatio">Ventilation Ratio:</label>
@@ -82,7 +85,10 @@
                         <td id="gableVentTotal">0</td>
                     </tr>
                     <tr>
-                        <td>Other Exhaust</td>
+                        <td>
+                            Other Exhaust
+                            <input type="text" id="otherExhaustDesc" placeholder="Description" class="vent-description">
+                        </td>
                         <td><input type="number" id="existingOtherExhaustCount" min="0"></td>
                         <td>EA</td>
                         <td><input type="number" id="existingOtherExhaustNFVA" min="0"></td>
@@ -120,7 +126,10 @@
                         <td id="soffitVentTotal">0</td>
                     </tr>
                     <tr>
-                        <td>Other Intake</td>
+                        <td>
+                            Other Intake
+                            <input type="text" id="otherIntakeDesc" placeholder="Description" class="vent-description">
+                        </td>
                         <td><input type="number" id="existingOtherIntakeCount" min="0"></td>
                         <td>EA</td>
                         <td><input type="number" id="existingOtherIntakeNFVA" min="0"></td>
