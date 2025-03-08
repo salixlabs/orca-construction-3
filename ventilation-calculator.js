@@ -2,7 +2,6 @@
 const VENT_SPECS = {
     ridge: { nfa: 18 },
     rvo: { nfa: 38 },
-    gable: { nfa: 864 },
     birdBlock: { nfa: 3.14 },
     soffit: { nfa: 9 }
 };
@@ -52,21 +51,18 @@ function calculateVentilation() {
     // Calculate existing exhaust ventilation
     const ridgeLength = parseFloat(document.getElementById('existingRidgeLength').value) || 0;
     const rvoCount = parseFloat(document.getElementById('existingRVOCount').value) || 0;
-    const gableCount = parseFloat(document.getElementById('existingGableCount').value) || 0;
     const otherExhaustCount = parseFloat(document.getElementById('existingOtherExhaustCount').value) || 0;
     const otherExhaustNFVA = parseFloat(document.getElementById('existingOtherExhaustNFVA').value) || 0;
 
     // Calculate exhaust totals
     const ridgeTotal = ridgeLength * VENT_SPECS.ridge.nfa;
     const rvoTotal = rvoCount * VENT_SPECS.rvo.nfa;
-    const gableTotal = gableCount * VENT_SPECS.gable.nfa;
     const otherExhaustTotal = otherExhaustCount * otherExhaustNFVA;
-    const totalExhaust = ridgeTotal + rvoTotal + gableTotal + otherExhaustTotal;
+    const totalExhaust = ridgeTotal + rvoTotal + otherExhaustTotal;
 
     // Update exhaust totals in table
     document.getElementById('ridgeVentTotal').textContent = formatNumber(ridgeTotal);
     document.getElementById('rvoVentTotal').textContent = formatNumber(rvoTotal);
-    document.getElementById('gableVentTotal').textContent = formatNumber(gableTotal);
     document.getElementById('otherExhaustTotal').textContent = formatNumber(otherExhaustTotal);
     document.getElementById('totalExhaust').textContent = formatNumber(totalExhaust);
 
@@ -110,7 +106,6 @@ function calculateVentilation() {
             <ul>
                 <li>Option 1: Add ${formatNumber(Math.ceil(exhaustDeficit/VENT_SPECS.ridge.nfa))} LF of ridge vent</li>
                 <li>Option 2: Add ${Math.ceil(exhaustDeficit/VENT_SPECS.rvo.nfa)} RVO vents</li>
-                <li>Option 3: Add ${Math.ceil(exhaustDeficit/VENT_SPECS.gable.nfa)} gable vents</li>
             </ul>
         `;
     }
