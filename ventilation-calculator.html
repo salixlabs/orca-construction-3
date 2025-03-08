@@ -34,27 +34,8 @@
                 <h2>Attic Measurements</h2>
             </div>
             <div class="form-group">
-                <label for="calculationType">Calculation Method:</label>
-                <select id="calculationType" required>
-                    <option value="total">Total Square Footage</option>
-                    <option value="dimensions">Length × Width</option>
-                </select>
-            </div>
-            <div id="totalSqFtInput" class="form-group">
                 <label for="atticSF">Total Attic Square Footage:</label>
                 <input type="number" id="atticSF" required>
-            </div>
-            <div id="dimensionsInput" class="form-group" style="display: none;">
-                <div class="dimensions-group">
-                    <div>
-                        <label for="atticLength">Length (ft):</label>
-                        <input type="number" id="atticLength">
-                    </div>
-                    <div>
-                        <label for="atticWidth">Width (ft):</label>
-                        <input type="number" id="atticWidth">
-                    </div>
-                </div>
             </div>
             <div class="form-group">
                 <label for="ventRatio">Ventilation Ratio:</label>
@@ -67,71 +48,89 @@
 
         <div class="section">
             <div class="section-header">
-                <h2>Exhaust Ventilation (Upper)</h2>
-                <span class="section-total" id="exhaustVentTotal">0 sq.in.</span>
+                <h2>Existing Ventilation</h2>
             </div>
             <div class="form-group">
-                <label class="radio-label">
-                    <input type="radio" name="exhaustType" value="ridge" checked>
-                    <span>Ridge Vent System</span>
-                </label>
-                <div class="sub-input" id="ridgeVentOptions">
-                    <label>Ridge Length (feet):</label>
-                    <input type="number" id="ridgeVentLF">
-                    <select id="ridgeVentType">
-                        <option value="12">Standard Ridge Vent (12 sq.in./ft)</option>
-                        <option value="18">High-capacity Ridge Vent (18 sq.in./ft)</option>
-                    </select>
-                </div>
+                <h3>Exhaust (Upper)</h3>
+                <table class="vent-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>NFVA</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>Ridge Vent</td>
+                        <td><input type="number" id="existingRidgeLength" min="0"></td>
+                        <td>LF</td>
+                        <td>18</td>
+                        <td id="ridgeVentTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>RVO Vents</td>
+                        <td><input type="number" id="existingRVOCount" min="0"></td>
+                        <td>EA</td>
+                        <td>38</td>
+                        <td id="rvoVentTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Gable Vents</td>
+                        <td><input type="number" id="existingGableCount" min="0"></td>
+                        <td>EA</td>
+                        <td>864</td>
+                        <td id="gableVentTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Other Exhaust</td>
+                        <td><input type="number" id="existingOtherExhaustCount" min="0"></td>
+                        <td>EA</td>
+                        <td><input type="number" id="existingOtherExhaustNFVA" min="0"></td>
+                        <td id="otherExhaustTotal">0</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4">Total Exhaust:</td>
+                        <td id="totalExhaust">0</td>
+                    </tr>
+                </table>
             </div>
-            <div class="form-group">
-                <label class="radio-label">
-                    <input type="radio" name="exhaustType" value="static">
-                    <span>Static Roof Vents</span>
-                </label>
-                <div class="sub-input" id="staticVentOptions" style="display: none;">
-                    <label>Number of Vents:</label>
-                    <input type="number" id="staticVentCount">
-                    <select id="staticVentType">
-                        <option value="50">Standard Roof Vent (50 sq.in.)</option>
-                        <option value="65">High-capacity Roof Vent (65 sq.in.)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
 
-        <div class="section">
-            <div class="section-header">
-                <h2>Intake Ventilation (Lower)</h2>
-                <span class="section-total" id="intakeVentTotal">0 sq.in.</span>
-            </div>
             <div class="form-group">
-                <label class="radio-label">
-                    <input type="radio" name="intakeType" value="soffit" checked>
-                    <span>Continuous Soffit</span>
-                </label>
-                <div class="sub-input" id="soffitVentOptions">
-                    <label>Soffit Length (feet):</label>
-                    <input type="number" id="soffitVentLF">
-                    <select id="soffitVentType">
-                        <option value="9">Standard Soffit (9 sq.in./ft)</option>
-                        <option value="12">High-capacity Soffit (12 sq.in./ft)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="radio-label">
-                    <input type="radio" name="intakeType" value="individual">
-                    <span>Individual Soffit Vents</span>
-                </label>
-                <div class="sub-input" id="individualSoffitOptions" style="display: none;">
-                    <label>Number of Vents:</label>
-                    <input type="number" id="individualSoffitCount">
-                    <select id="individualSoffitType">
-                        <option value="45">Standard Individual Vent (45 sq.in.)</option>
-                        <option value="65">High-capacity Individual Vent (65 sq.in.)</option>
-                    </select>
-                </div>
+                <h3>Intake (Lower)</h3>
+                <table class="vent-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>NFVA</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>Bird Blocks</td>
+                        <td><input type="number" id="existingBirdBlockCount" min="0"></td>
+                        <td>EA</td>
+                        <td>3.14</td>
+                        <td id="birdBlockTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Soffit Vents (3")</td>
+                        <td><input type="number" id="existingSoffitLength" min="0"></td>
+                        <td>LF</td>
+                        <td>9</td>
+                        <td id="soffitVentTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Other Intake</td>
+                        <td><input type="number" id="existingOtherIntakeCount" min="0"></td>
+                        <td>EA</td>
+                        <td><input type="number" id="existingOtherIntakeNFVA" min="0"></td>
+                        <td id="otherIntakeTotal">0</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4">Total Intake:</td>
+                        <td id="totalIntake">0</td>
+                    </tr>
+                </table>
             </div>
         </div>
 
