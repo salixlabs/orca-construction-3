@@ -8,6 +8,10 @@ const VENT_SPECS = {
 };
 
 const SQFT_TO_SQIN = 144; // Conversion factor: 1 sq ft = 144 sq in
+const EXHAUST_MIN = 0.40; // 40% minimum for exhaust
+const EXHAUST_MAX = 0.50; // 50% maximum for exhaust
+const INTAKE_MIN = 0.50;  // 50% minimum for intake
+const INTAKE_MAX = 0.60;  // 60% maximum for intake
 
 // Helper function to format numbers with commas
 function formatNumber(number) {
@@ -17,22 +21,33 @@ function formatNumber(number) {
     }).format(number);
 }
 
+// Function to update square inches conversion display
+function updateSquareInchesDisplay() {
+    const atticSF = parseFloat(document.getElementById('atticSF').value) || 0;
+    const atticSqIn = atticSF * SQFT_TO_SQIN;
+    document.getElementById('sqInchesConversion').textContent = 
+        `${formatNumber(atticSqIn)} square inches (${formatNumber(atticSF)} × ${SQFT_TO_SQIN})`;
+}
+
 function calculateVentilation() {
     // Get attic area and convert to square inches
     const atticSF = parseFloat(document.getElementById('atticSF').value) || 0;
     const atticSqIn = atticSF * SQFT_TO_SQIN;
     
     // Update square inches conversion display
-    document.getElementById('sqInchesConversion').textContent = 
-        `${formatNumber(atticSqIn)} square inches (${formatNumber(atticSF)} × ${SQFT_TO_SQIN})`;
+    updateSquareInchesDisplay();
     
     // Get ventilation ratio
     const ratio = parseInt(document.getElementById('ventRatio').value);
     
     // Calculate required ventilation (using square inches)
-    const totalRequired = atticSqIn / ratio;
-    const exhaustRequired = totalRequired / 2;
-    const intakeRequired = totalRequired / 2;
+    const totalRequired = Math.round(atticSqIn / ratio);
+    
+    // Calculate ranges for exhaust and intake
+    const exhaustRequiredMin = Math.round(totalRequired * EXHAUST_MIN);
+    const exhaustRequiredMax = Math.round(totalRequired * EXHAUST_MAX);
+    const intakeRequiredMin = Math.round(totalRequired * INTAKE_MIN);
+    const intakeRequiredMax = Math.round(totalRequired * INTAKE_MAX);
     
     // Calculate existing exhaust ventilation
     const ridgeLength = parseFloat(document.getElementById('existingRidgeLength').value) || 0;
@@ -79,34 +94,34 @@ function calculateVentilation() {
         <p>Based on your attic area of ${formatNumber(atticSF)} sq.ft. (${formatNumber(atticSqIn)} sq.in.) and a 1:${ratio} ratio:</p>
         <ul>
             <li>Total Required: ${formatNumber(totalRequired)} sq.in.</li>
-            <li>Exhaust Required: ${formatNumber(exhaustRequired)} sq.in.</li>
-            <li>Intake Required: ${formatNumber(intakeRequired)} sq.in.</li>
+            <li>Exhaust Required: ${formatNumber(exhaustRequiredMin)}-${formatNumber(exhaustRequiredMax)} sq.in. (40-50%)</li>
+            <li>Intake Required: ${formatNumber(intakeRequiredMin)}-${formatNumber(intakeRequiredMax)} sq.in. (50-60%)</li>
         </ul>
     `;
 
     // Generate recommendations
     let recommendations = '<h3>Ventilation Analysis</h3>';
     
-    // Check exhaust
-    const exhaustDeficit = exhaustRequired - totalExhaust;
+    // Check exhaust - use minimum required for deficit calculation
+    const exhaustDeficit = exhaustRequiredMin - totalExhaust;
     if (exhaustDeficit > 0) {
         recommendations += `
-            <p>Additional Exhaust Needed: ${formatNumber(exhaustDeficit)} sq.in.</p>
+            <p>Additional Exhaust Needed: ${formatNumber(exhaustDeficit)} sq.in. (minimum)</p>
             <ul>
-                <li>Option 1: Add ${formatNumber(exhaustDeficit/VENT_SPECS.ridge.nfa)} LF of ridge vent</li>
+                <li>Option 1: Add ${formatNumber(Math.ceil(exhaustDeficit/VENT_SPECS.ridge.nfa))} LF of ridge vent</li>
                 <li>Option 2: Add ${Math.ceil(exhaustDeficit/VENT_SPECS.rvo.nfa)} RVO vents</li>
                 <li>Option 3: Add ${Math.ceil(exhaustDeficit/VENT_SPECS.gable.nfa)} gable vents</li>
             </ul>
         `;
     }
 
-    // Check intake
-    const intakeDeficit = intakeRequired - totalIntake;
+    // Check intake - use minimum required for deficit calculation
+    const intakeDeficit = intakeRequiredMin - totalIntake;
     if (intakeDeficit > 0) {
         recommendations += `
-            <p>Additional Intake Needed: ${formatNumber(intakeDeficit)} sq.in.</p>
+            <p>Additional Intake Needed: ${formatNumber(intakeDeficit)} sq.in. (minimum)</p>
             <ul>
-                <li>Option 1: Add ${formatNumber(intakeDeficit/VENT_SPECS.soffit.nfa)} LF of continuous soffit vents</li>
+                <li>Option 1: Add ${formatNumber(Math.ceil(intakeDeficit/VENT_SPECS.soffit.nfa))} LF of continuous soffit vents</li>
                 <li>Option 2: Add ${Math.ceil(intakeDeficit/VENT_SPECS.birdBlock.nfa)} bird blocks</li>
             </ul>
         `;
@@ -118,14 +133,14 @@ function calculateVentilation() {
 
     document.getElementById('recommendations').innerHTML = recommendations;
 
-    // Display summary
+    // Display summary with ranges
     document.getElementById('result').innerHTML = `
         <h3>Ventilation Summary:</h3>
         <p>Attic Area: ${formatNumber(atticSF)} sq.ft. (${formatNumber(atticSqIn)} sq.in.)</p>
         <p>Ventilation Ratio: 1:${ratio}</p>
         <p>Total Required: ${formatNumber(totalRequired)} sq.in.</p>
-        <p>Current Exhaust: ${formatNumber(totalExhaust)} sq.in. (${Math.round(totalExhaust/exhaustRequired * 100)}% of required)</p>
-        <p>Current Intake: ${formatNumber(totalIntake)} sq.in. (${Math.round(totalIntake/intakeRequired * 100)}% of required)</p>
+        <p>Current Exhaust: ${formatNumber(totalExhaust)} sq.in. (${Math.round(totalExhaust/exhaustRequiredMin * 100)}% of minimum required)</p>
+        <p>Current Intake: ${formatNumber(totalIntake)} sq.in. (${Math.round(totalIntake/intakeRequiredMin * 100)}% of minimum required)</p>
         <p><strong>Status: ${(exhaustDeficit <= 0 && intakeDeficit <= 0) ? 'Requirements Met' : 'Additional Ventilation Needed'}</strong></p>
     `;
 }
@@ -139,13 +154,19 @@ function resetCalculator() {
     // Reset ventilation ratio
     document.getElementById('ventRatio').value = '150';
 
+    // Update the square inches display
+    updateSquareInchesDisplay();
+
     // Recalculate to update totals
     calculateVentilation();
 }
 
 // Add event listeners to all inputs
 function initializeAutoCalculate() {
-    // Listen to all number inputs
+    // Add specific listener for attic square footage input
+    document.getElementById('atticSF').addEventListener('input', updateSquareInchesDisplay);
+
+    // Listen to all number inputs for full calculation
     document.querySelectorAll('input[type="number"]').forEach(input => {
         input.addEventListener('input', calculateVentilation);
     });
