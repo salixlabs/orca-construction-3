@@ -92,30 +92,6 @@ function calculateCost() {
     `;
 }
 
-function resetCalculator() {
-    // Reset all number inputs to empty
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.value = '';
-    });
-
-    // Uncheck all radio buttons
-    document.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.checked = false;
-    });
-
-    // Uncheck all checkboxes
-    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
-    });
-
-    // Clear custom option fields
-    document.getElementById('customOptionText').value = '';
-    document.getElementById('customOptionPrice').value = '';
-
-    // Recalculate to update totals
-    calculateCost();
-}
-
 // Add event listeners to all inputs
 function initializeAutoCalculate() {
     // Listen to number inputs
@@ -138,6 +114,30 @@ function initializeAutoCalculate() {
     checkboxInputs.forEach(input => {
         input.addEventListener('change', calculateCost);
     });
+}
+
+function resetCalculator() {
+    // Reset all number inputs to empty
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.value = '';
+    });
+
+    // Uncheck all radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Uncheck all checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+    });
+
+    // Clear custom option fields
+    document.getElementById('customOptionText').value = '';
+    document.getElementById('customOptionPrice').value = '';
+
+    // Recalculate to update totals
+    calculateCost();
 }
 
 // Initialize calculator when the page loads

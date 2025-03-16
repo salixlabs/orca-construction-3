@@ -574,4 +574,76 @@ li {
     background-position: center;
     background-size: 120px;
     background-blend-mode: soft-light;
+}
+
+/* Main layout structure */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 8px;
+    align-items: start;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.right-column {
+    position: sticky;
+    top: 0;
+}
+
+/* Measurements and Requirements sections */
+.measurements-section,
+.requirements-section {
+    padding: 8px;
+}
+
+.measurements-section .form-group.compact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Ventilation section */
+.ventilation-section {
+    padding: 8px;
+}
+
+.ventilation-section .form-group {
+    margin-bottom: 8px;
+}
+
+.ventilation-section .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Make tables more compact */
+.vent-table {
+    margin: 0.25rem 0;
+}
+
+.vent-table th,
+.vent-table td {
+    padding: 3px 4px;
+}
+
+/* Bottom row layout */
+.bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .right-column {
+        position: static;
+    }
 } 
