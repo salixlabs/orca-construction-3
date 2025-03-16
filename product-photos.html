@@ -14,6 +14,11 @@
 
         .photo-section {
             margin-bottom: 40px;
+            display: none; /* Hide sections by default */
+        }
+
+        .photo-section.active {
+            display: block; /* Show active section */
         }
 
         .photo-section h2 {
@@ -70,6 +75,31 @@
         if (localStorage.getItem('orcaLoggedIn') !== 'true') {
             window.location.href = '/';
         }
+
+        // Function to show the relevant section based on URL hash
+        function showRelevantSection() {
+            // Hide all sections first
+            document.querySelectorAll('.photo-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Get the hash from URL (e.g., #aluminum-railing)
+            const hash = window.location.hash;
+            
+            if (hash) {
+                // Show the section that matches the hash
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            }
+        }
+
+        // Run when page loads
+        document.addEventListener('DOMContentLoaded', showRelevantSection);
+        
+        // Run when hash changes (user clicks different photo links)
+        window.addEventListener('hashchange', showRelevantSection);
     </script>
 </head>
 <body>
