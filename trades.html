@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Construction - Trades</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <div class="content-header">
+            <img src="Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+        </div>
+        <div class="button-grid">
+            <a href="trades/roofing/index.html" class="nav-button">
+                <img src="Assets/logo/ORE-tail.png" alt="Roofing">
+                <h2>Roofing</h2>
+                <p>Access roofing calculators and photo galleries</p>
+            </a>
+            <a href="trades/decking/index.html" class="nav-button">
+                <img src="Assets/logo/ORE-tail.png" alt="Decking">
+                <h2>Decking</h2>
+                <p>Access deck calculators and photo galleries</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html> 
