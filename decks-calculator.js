@@ -16,6 +16,21 @@ function formatNumber(number) {
     }).format(number);
 }
 
+function checkLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    if (username === 'ORE' && password === 'ORE') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.querySelector('.container').style.display = 'block';
+        // Initialize calculator after successful login
+        initializeAutoCalculate();
+        calculateCost();
+    } else {
+        alert('Invalid credentials. Please try again.');
+    }
+}
+
 function calculateCost() {
     // Get measurements
     const firstFloorSF = parseFloat(document.getElementById('firstFloorSF').value) || 0;
@@ -54,7 +69,7 @@ function calculateCost() {
 
     // Calculate additional options
     if (document.getElementById('pressureTreated').checked) {
-        optionsTotal += firstFloorSF * 32;
+        optionsTotal += firstFloorSF * 26;
     }
     if (document.getElementById('secondStoryFraming').checked) {
         optionsTotal += secondFloorSF * 38;
@@ -65,11 +80,11 @@ function calculateCost() {
     if (document.getElementById('dumpFee').checked) {
         optionsTotal += (firstFloorSF + secondFloorSF) * 6;
     }
-    if (document.getElementById('permits').checked) {
-        optionsTotal += 4000;
-    }
     if (document.getElementById('rainEscape').checked) {
         optionsTotal += (firstFloorSF + secondFloorSF) * 28;
+    }
+    if (document.getElementById('permits').checked) {
+        optionsTotal += 4000;
     }
     // Add custom option cost
     const customPrice = parseFloat(document.getElementById('customOptionPrice').value) || 0;
@@ -140,8 +155,16 @@ function resetCalculator() {
     calculateCost();
 }
 
-// Initialize calculator when the page loads
+// Check login status when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    initializeAutoCalculate();
-    calculateCost();
+    // Hide calculator initially
+    document.querySelector('.container').style.display = 'none';
+    
+    // Show calculator if already logged in
+    if (localStorage.getItem('orcaLoggedIn') === 'true') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.querySelector('.container').style.display = 'block';
+        initializeAutoCalculate();
+        calculateCost();
+    }
 }); 
