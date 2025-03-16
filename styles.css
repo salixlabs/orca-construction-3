@@ -747,4 +747,21 @@ li {
     .custom-price {
         font-size: 16px; /* Larger for mobile touch */
     }
+}
+
+.photo-link {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--primary-gold);
+    text-decoration: none;
+    padding: 2px 6px;
+    border: 1px solid var(--primary-gold);
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.photo-link:hover {
+    background-color: var(--primary-gold);
+    color: white;
 } 
