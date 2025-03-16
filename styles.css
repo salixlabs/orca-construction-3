@@ -579,71 +579,172 @@ li {
 /* Main layout structure */
 .main-layout {
     display: grid;
-    grid-template-columns: 1fr 450px;
-    gap: 8px;
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
-.left-column {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
+.left-column,
 .right-column {
-    position: sticky;
-    top: 0;
-}
-
-/* Measurements and Requirements sections */
-.measurements-section,
-.requirements-section {
-    padding: 8px;
-}
-
-.measurements-section .form-group.compact {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+}
+
+/* Section styles */
+.section {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    padding: 16px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.section-total {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-gold);
+}
+
+/* Form styles */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--primary-dark);
+}
+
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Radio and checkbox styles */
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"],
+.radio-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.radio-label span {
+    font-size: 14px;
+    color: var(--primary-dark);
+}
+
+/* Custom option styles */
+.custom-option {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+}
+
+.custom-text {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.custom-price-wrapper {
+    display: flex;
+    align-items: center;
     gap: 4px;
 }
 
-/* Ventilation section */
-.ventilation-section {
+.dollar-sign {
+    font-size: 14px;
+    color: var(--primary-dark);
+}
+
+.custom-price {
+    width: 80px;
     padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-.ventilation-section .form-group {
-    margin-bottom: 8px;
+/* Cost summary styles */
+.cost-summary {
+    background-color: var(--primary-light);
+    background-image: url('Assets/ORE-tail.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120px;
+    background-blend-mode: soft-light;
 }
 
-.ventilation-section .form-group:last-child {
-    margin-bottom: 0;
+.cost-summary h2 {
+    margin-bottom: 16px;
 }
 
-/* Make tables more compact */
-.vent-table {
-    margin: 0.25rem 0;
+#result {
+    position: relative;
+    z-index: 1;
 }
 
-.vent-table th,
-.vent-table td {
-    padding: 3px 4px;
+#result p {
+    margin: 8px 0;
+    font-size: 14px;
 }
 
-/* Bottom row layout */
-.bottom-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+#result strong {
+    color: var(--primary-gold);
+    font-size: 16px;
+    font-weight: 500;
 }
 
-/* Responsive adjustments */
+/* Responsive styles */
 @media (max-width: 1024px) {
     .main-layout {
         grid-template-columns: 1fr;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 12px;
     }
     
-    .right-column {
-        position: static;
+    .form-group input[type="number"],
+    .custom-text,
+    .custom-price {
+        font-size: 16px; /* Larger for mobile touch */
     }
 } 
