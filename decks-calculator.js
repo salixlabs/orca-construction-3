@@ -16,21 +16,6 @@ function formatNumber(number) {
     }).format(number);
 }
 
-function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    if (username === 'ORE' && password === 'ORE') {
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.querySelector('.container').style.display = 'block';
-        // Initialize calculator after successful login
-        initializeAutoCalculate();
-        calculateCost();
-    } else {
-        alert('Invalid credentials. Please try again.');
-    }
-}
-
 function calculateCost() {
     // Get measurements
     const firstFloorSF = parseFloat(document.getElementById('firstFloorSF').value) || 0;
@@ -155,16 +140,8 @@ function resetCalculator() {
     calculateCost();
 }
 
-// Check login status when page loads
+// Initialize calculator when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Hide calculator initially
-    document.querySelector('.container').style.display = 'none';
-    
-    // Show calculator if already logged in
-    if (localStorage.getItem('orcaLoggedIn') === 'true') {
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.querySelector('.container').style.display = 'block';
-        initializeAutoCalculate();
-        calculateCost();
-    }
+    initializeAutoCalculate();
+    calculateCost();
 }); 

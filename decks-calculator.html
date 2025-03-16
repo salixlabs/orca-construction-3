@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decks Estimator</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
 </head>
 <body>
-    <div id="loginOverlay" class="login-overlay">
-        <div class="login-container">
-            <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo" class="login-logo">
-            <div class="login-form">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button onclick="checkLogin()">Login</button>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <header class="site-header">
             <div class="logo">
