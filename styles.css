@@ -15,8 +15,10 @@ body {
     color: var(--text-color);
     line-height: 1.2;
     margin: 0;
-    padding: 5px;
+    padding: 0;
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .container {
@@ -24,6 +26,7 @@ body {
     max-width: 100%;
     padding: 16px;
     margin: 0;
+    box-sizing: border-box;
 }
 
 .top-row {
@@ -43,6 +46,7 @@ body {
     padding: 16px 0;
     margin-bottom: 24px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -68,6 +72,8 @@ body {
     font-size: 24px;
     color: var(--primary-dark);
     margin: 0;
+    padding: 0 16px;
+    word-wrap: break-word;
 }
 
 h2 {
@@ -214,7 +220,7 @@ button:hover {
 /* Tablet and smaller screens */
 @media (max-width: 768px) {
     .container {
-        grid-template-columns: 1fr;
+        padding: 12px;
     }
     
     .measurements .form-group {
@@ -337,6 +343,7 @@ button:hover {
     right: 16px;
     padding: 8px 16px;
     font-size: 14px;
+    z-index: 1;
 }
 
 .custom-option {
@@ -559,12 +566,12 @@ li {
 /* Main layout structure */
 .main-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 16px;
     width: 100%;
-    max-width: 100%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .left-column,
@@ -573,6 +580,7 @@ li {
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    min-width: 0; /* Prevent flex items from overflowing */
 }
 
 /* Section styles */
@@ -581,9 +589,9 @@ li {
     border-radius: 4px;
     border: 1px solid var(--border-color);
     padding: 20px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent content overflow */
 }
 
 .section-header {
@@ -614,6 +622,7 @@ li {
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group label {
@@ -621,8 +630,11 @@ li {
     color: var(--primary-dark);
 }
 
-.form-group input[type="number"] {
+.form-group input[type="number"],
+.custom-text,
+.custom-price {
     width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -637,6 +649,7 @@ li {
     padding: 8px 0;
     cursor: pointer;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .radio-label input[type="radio"],
@@ -650,6 +663,8 @@ li {
     font-size: 16px;
     color: var(--primary-dark);
     flex: 1;
+    min-width: 0; /* Allow text to wrap */
+    word-wrap: break-word;
 }
 
 /* Custom option styles */
@@ -661,14 +676,7 @@ li {
     padding-top: 12px;
     border-top: 1px solid var(--border-color);
     width: 100%;
-}
-
-.custom-text {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .custom-price-wrapper {
@@ -681,14 +689,6 @@ li {
 .dollar-sign {
     font-size: 16px;
     color: var(--primary-dark);
-}
-
-.custom-price {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 16px;
 }
 
 /* Cost summary styles */
@@ -748,15 +748,67 @@ li {
     }
 }
 
-@media (max-width: 480px) {
-    .section {
+@media (max-width: 768px) {
+    .container {
         padding: 12px;
     }
     
-    .form-group input[type="number"],
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .section {
+        padding: 16px;
+    }
+    
+    .section-header h2,
+    .section-total {
+        font-size: 16px;
+    }
+    
+    .form-group label,
+    .radio-label span,
     .custom-text,
-    .custom-price {
-        font-size: 16px; /* Larger for mobile touch */
+    .custom-price,
+    .dollar-sign {
+        font-size: 14px;
+    }
+    
+    .form-group input[type="number"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Ensure proper stacking of custom option inputs on mobile */
+    .custom-option {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .custom-price-wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 20px;
+    }
+
+    .logo img {
+        max-width: 200px;
+    }
+
+    .section {
+        padding: 12px;
+    }
+
+    .reset-button {
+        position: static;
+        margin: 16px auto;
+        display: block;
     }
 }
 
