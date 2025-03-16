@@ -20,13 +20,10 @@ body {
 }
 
 .container {
+    width: 100%;
     max-width: 100%;
-    margin: 0 auto;
-    background-color: var(--background-color);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    padding: 16px;
+    margin: 0;
 }
 
 .top-row {
@@ -42,13 +39,10 @@ body {
 }
 
 .site-header {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-    padding: 10px;
+    width: 100%;
+    padding: 16px 0;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
 .logo {
@@ -65,21 +59,15 @@ body {
 }
 
 .logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    max-width: 240px;
+    height: auto;
+    margin-bottom: 16px;
 }
 
-h1 {
+.site-header h1 {
+    font-size: 24px;
     color: var(--primary-dark);
     margin: 0;
-    font-size: 24px;
-    font-weight: normal;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    white-space: nowrap;
 }
 
 h2 {
@@ -248,7 +236,7 @@ button:hover {
 
 .cost-summary {
     background-color: var(--primary-light);
-    background-image: url('Assets/ORE-tail.png');
+    background-image: url('Assets/logo/ORE-tail.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 150px;
@@ -263,7 +251,7 @@ button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('Assets/ORE-tail.png');
+    background-image: url('Assets/logo/ORE-tail.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 150px;
@@ -344,19 +332,11 @@ button:hover {
 }
 
 .reset-button {
-    background-color: var(--primary-gold);
-    color: white;
+    position: absolute;
+    top: 16px;
+    right: 16px;
     padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 13px;
-    cursor: pointer;
-    margin: 0;
-    width: auto;
-}
-
-.reset-button:hover {
-    background-color: var(--primary-dark);
+    font-size: 14px;
 }
 
 .custom-option {
@@ -569,7 +549,7 @@ li {
 
 .summary-section {
     background-color: var(--primary-light);
-    background-image: url('Assets/ORE-tail.png');
+    background-image: url('Assets/logo/ORE-tail.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 120px;
@@ -581,9 +561,10 @@ li {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 16px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .left-column,
@@ -591,6 +572,7 @@ li {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
 }
 
 /* Section styles */
@@ -598,25 +580,30 @@ li {
     background-color: white;
     border-radius: 4px;
     border: 1px solid var(--border-color);
-    padding: 16px;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .section-header h2 {
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--primary-dark);
 }
 
 .section-total {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--primary-gold);
 }
@@ -625,115 +612,139 @@ li {
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    width: 100%;
 }
 
 .form-group label {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-dark);
 }
 
 .form-group input[type="number"] {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Radio and checkbox styles */
 .radio-label {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 0;
+    gap: 12px;
+    padding: 8px 0;
     cursor: pointer;
+    width: 100%;
 }
 
 .radio-label input[type="radio"],
 .radio-label input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin: 0;
 }
 
 .radio-label span {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-dark);
+    flex: 1;
 }
 
 /* Custom option styles */
 .custom-option {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     align-items: center;
-    margin-top: 8px;
-    padding-top: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
     border-top: 1px solid var(--border-color);
+    width: 100%;
 }
 
 .custom-text {
     flex: 1;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .custom-price-wrapper {
     display: flex;
     align-items: center;
     gap: 4px;
+    min-width: 120px;
 }
 
 .dollar-sign {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-dark);
 }
 
 .custom-price {
-    width: 80px;
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Cost summary styles */
 .cost-summary {
     background-color: var(--primary-light);
-    background-image: url('Assets/ORE-tail.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 120px;
-    background-blend-mode: soft-light;
+    margin-top: auto;
 }
 
 .cost-summary h2 {
+    color: var(--primary-dark);
     margin-bottom: 16px;
 }
 
 #result {
-    position: relative;
-    z-index: 1;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 #result p {
     margin: 8px 0;
-    font-size: 14px;
 }
 
 #result strong {
-    color: var(--primary-gold);
-    font-size: 16px;
-    font-weight: 500;
+    color: var(--primary-dark);
 }
 
 /* Responsive styles */
 @media (max-width: 1024px) {
+    .container {
+        padding: 12px;
+    }
+    
     .main-layout {
-        grid-template-columns: 1fr;
-        padding: 0 12px;
+        gap: 12px;
+    }
+    
+    .section {
+        padding: 16px;
+    }
+    
+    .section-header h2,
+    .section-total {
+        font-size: 16px;
+    }
+    
+    .form-group label,
+    .radio-label span,
+    .custom-text,
+    .custom-price,
+    .dollar-sign {
+        font-size: 14px;
+    }
+    
+    .form-group input[type="number"] {
+        padding: 8px;
+        font-size: 14px;
     }
 }
 
