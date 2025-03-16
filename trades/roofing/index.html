@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Construction - Roofing</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <a href="../../trades.html" class="back-button">Back to Trades</a>
+        <div class="content-header">
+            <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+            <h1>Roofing</h1>
+        </div>
+        <div class="button-grid">
+            <a href="calculator.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Ventilation Calculator">
+                <h2>Ventilation Calculator</h2>
+                <p>Calculate proper ventilation requirements for your attic</p>
+            </a>
+            <a href="gallery/index.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Roofs Gallery">
+                <h2>Roofs Gallery</h2>
+                <p>Browse our collection of roofing projects and materials</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html> 
