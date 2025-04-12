@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decks Estimator</title>
     <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/buttons.css">
-    <script>
-        // Check if logged in
-        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
-            window.location.href = '/';
-        }
-    </script>
 </head>
 <body>
     <div class="container">
@@ -20,15 +13,13 @@
                 <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
             </div>
             <h1>Orca Roofing & Exteriors Decks Calculator</h1>
-            <button id="resetButton" class="reset-button" onclick="resetCalculator()">Reset</button>
+            <button class="reset-button" onclick="resetCalculator()">Reset</button>
         </header>
         
         <div class="main-layout">
             <div class="left-column">
                 <div class="section">
-                    <div class="section-header">
-                        <h2>Measurements</h2>
-                    </div>
+                    <h2>Measurements</h2>
                     <div class="form-group">
                         <label for="firstFloorSF">Total SF (Ground Level):</label>
                         <input type="number" id="firstFloorSF" required>
@@ -48,17 +39,14 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-header">
-                        <h2>Ground Level Decking</h2>
-                        <span class="section-total" id="firstLevelTotal">$0.00</span>
-                    </div>
+                    <h2>Ground Level Decking <span class="section-total" id="firstLevelTotal">$0.00</span></h2>
                     <div class="form-group">
                         <label class="radio-label">
                             <input type="radio" name="firstLevel" value="cedar4" data-price="44">
                             <span>Cedar - 4" ($44/SF)</span>
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="firstLevel" value="cedar6_2" data-price="48">
+                            <input type="radio" name="firstLevel" value="cedar6" data-price="48">
                             <span>Cedar - 6" ($48/SF)</span>
                         </label>
                         <label class="radio-label">
@@ -77,10 +65,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-header">
-                        <h2>Railings</h2>
-                        <span class="section-total" id="railingsTotal">$0.00</span>
-                    </div>
+                    <h2>Railings <span class="section-total" id="railingsTotal">$0.00</span></h2>
                     <div class="form-group">
                         <label class="radio-label">
                             <input type="radio" name="railing" value="cedar" data-price="63">
@@ -88,7 +73,7 @@
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="railing" value="cedarHog" data-price="69">
-                            <span>Cedar / Hog Wire ($69/LF) <a href="../../Assets/trades/decking/railings/cedar-hogwire/Hogwire1_web_logo.jpg" target="_blank" class="photo-link">View Photos</a></span>
+                            <span>Cedar / Hog Wire ($69/LF)</span>
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="railing" value="cableCedar" data-price="110">
@@ -100,7 +85,7 @@
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="railing" value="aluminum" data-price="153">
-                            <span>Aluminum ($153/LF) <a href="../../Assets/trades/decking/railings/aluminum" target="_blank" class="photo-link">View Photos</a></span>
+                            <span>Aluminum ($153/LF)</span>
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="railing" value="glass" data-price="208">
@@ -116,50 +101,37 @@
 
             <div class="right-column">
                 <div class="section">
-                    <div class="section-header">
-                        <h2>Framing & Options</h2>
-                        <span class="section-total" id="optionsTotal">$0.00</span>
-                    </div>
+                    <h2>Framing & Options <span class="section-total" id="optionsTotal">$0.00</span></h2>
                     <div class="form-group">
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="pressureTreated" data-price="26">
                             <span>Ground Level Framing ($26/SF)</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="secondStoryFraming" data-price="38">
                             <span>Second Story Framing ($38/SF)</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="stairs" data-price="255">
                             <span>Stairs ($255 each)</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="dumpFee" data-price="6">
                             <span>Demo Existing Deck + Dump Fee ($6/SF)</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="rainEscape" data-price="28">
                             <span>Under Deck Water Catch System ($28/SF)</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="permits" data-price="4000">
                             <span>Plans & Permits ($4,000)</span>
                         </label>
-                        <div class="custom-option">
-                            <input type="text" id="customOptionText" placeholder="Custom Option" class="custom-text">
-                            <div class="custom-price-wrapper">
-                                <span class="dollar-sign">$</span>
-                                <input type="number" id="customOptionPrice" placeholder="0" class="custom-price">
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="section">
-                    <div class="section-header">
-                        <h2>Second Story Decking</h2>
-                        <span class="section-total" id="secondLevelTotal">$0.00</span>
-                    </div>
+                    <h2>Second Story Decking <span class="section-total" id="secondLevelTotal">$0.00</span></h2>
                     <div class="form-group">
                         <label class="radio-label">
                             <input type="radio" name="secondLevel" value="cedar4_2" data-price="54">
