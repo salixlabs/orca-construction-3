@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decks Estimator</title>
     <link rel="stylesheet" href="../../css/main.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -157,13 +163,134 @@
                 </div>
 
                 <div class="section cost-summary">
-                    <h2>Cost Breakdown</h2>
-                    <div id="result"></div>
+                    <div class="section-header">
+                        <h2>Cost Breakdown</h2>
+                    </div>
+                    <div id="result">
+                        <p class="summary-item"><strong>Total Square Footage:</strong> <span class="value">0 SF</span></p>
+                        <p class="summary-item"><strong>Total Railing Length:</strong> <span class="value">0 LF</span></p>
+                        <p class="summary-item"><strong>Number of Steps:</strong> <span class="value">0</span></p>
+                        <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">$0.00</span></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../../js/decks-calculator.js"></script>
+    <script>
+        // Calculator functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to all inputs
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', calculateTotal);
+            });
+
+            // Initial calculation
+            calculateTotal();
+        });
+
+        function calculateTotal() {
+            // Get measurements
+            const firstFloorSF = parseFloat(document.getElementById('firstFloorSF').value) || 0;
+            const secondFloorSF = parseFloat(document.getElementById('secondFloorSF').value) || 0;
+            const railingLF = parseFloat(document.getElementById('railingLF').value) || 0;
+            const steps = parseFloat(document.getElementById('steps').value) || 0;
+
+            // Get selected options and their prices
+            let firstLevelPrice = getSelectedRadioPrice('firstLevel');
+            let secondLevelPrice = getSelectedRadioPrice('secondLevel');
+            let railingPrice = getSelectedRadioPrice('railing');
+
+            // Calculate section totals
+            let firstLevelTotal = firstFloorSF * firstLevelPrice;
+            let secondLevelTotal = secondFloorSF * secondLevelPrice;
+            let railingsTotal = railingLF * railingPrice;
+            let optionsTotal = calculateOptionsTotal(firstFloorSF, secondFloorSF, steps);
+
+            // Update section totals
+            document.getElementById('firstLevelTotal').textContent = formatPrice(firstLevelTotal);
+            document.getElementById('secondLevelTotal').textContent = formatPrice(secondLevelTotal);
+            document.getElementById('railingsTotal').textContent = formatPrice(railingsTotal);
+            document.getElementById('optionsTotal').textContent = formatPrice(optionsTotal);
+
+            // Update cost breakdown
+            updateCostBreakdown(firstFloorSF, secondFloorSF, railingLF, steps, 
+                              firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal);
+        }
+
+        function getSelectedRadioPrice(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? parseFloat(selected.dataset.price) : 0;
+        }
+
+        function calculateOptionsTotal(firstFloorSF, secondFloorSF, steps) {
+            let total = 0;
+
+            // Ground Level Framing
+            if (document.getElementById('pressureTreated').checked) {
+                total += firstFloorSF * 26;
+            }
+
+            // Second Story Framing
+            if (document.getElementById('secondStoryFraming').checked) {
+                total += secondFloorSF * 38;
+            }
+
+            // Stairs
+            if (document.getElementById('stairs').checked) {
+                total += steps * 255;
+            }
+
+            // Demo and Dump Fee
+            if (document.getElementById('dumpFee').checked) {
+                total += (firstFloorSF + secondFloorSF) * 6;
+            }
+
+            // Water Catch System
+            if (document.getElementById('rainEscape').checked) {
+                total += secondFloorSF * 28;
+            }
+
+            // Permits
+            if (document.getElementById('permits').checked) {
+                total += 4000;
+            }
+
+            return total;
+        }
+
+        function updateCostBreakdown(firstFloorSF, secondFloorSF, railingLF, steps, 
+                                   firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal) {
+            const totalCost = firstLevelTotal + secondLevelTotal + railingsTotal + optionsTotal;
+            const result = document.getElementById('result');
+
+            result.innerHTML = `
+                <p class="summary-item"><strong>Total Square Footage:</strong> <span class="value">${firstFloorSF + secondFloorSF} SF</span></p>
+                <p class="summary-item"><strong>Total Railing Length:</strong> <span class="value">${railingLF} LF</span></p>
+                <p class="summary-item"><strong>Number of Steps:</strong> <span class="value">${steps}</span></p>
+                <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">${formatPrice(totalCost)}</span></p>
+            `;
+        }
+
+        function formatPrice(price) {
+            return '$' + price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function resetCalculator() {
+            // Reset all inputs
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = '';
+            });
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                radio.checked = false;
+            });
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Recalculate totals
+            calculateTotal();
+        }
+    </script>
 </body>
 </html> 
