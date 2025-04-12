@@ -20,13 +20,13 @@
 </head>
 <body>
     <div class="container">
-        <header class="site-header">
-            <div class="logo">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <div class="content-header">
+            <a href="../../trades.html">
                 <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
-            </div>
-            <h1>Orca Roofing & Exteriors Ventilation Calculator</h1>
-            <button id="resetButton" class="reset-button" onclick="resetCalculator()">Reset</button>
-        </header>
+            </a>
+            <h1>Ventilation Calculator</h1>
+        </div>
 
         <div class="main-layout">
             <div class="left-column">
@@ -165,5 +165,11 @@
     </div>
 
     <script src="../../js/ventilation-calculator.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
 </body>
 </html> 

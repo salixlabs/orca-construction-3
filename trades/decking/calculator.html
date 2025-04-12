@@ -3,8 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decks Estimator</title>
-    <link rel="stylesheet" href="../../css/main.css">
+    <title>Deck Calculator</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .cost-summary {
+            background-color: #e5dacc;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .cost-summary-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: center;
+            border: none;
+        }
+
+        .summary-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .whale-tail {
+            width: 100%;
+            height: 100%;
+            background-image: url('../../Assets/logo/ORE-tail.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15;
+        }
+
+        .total-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .summary-item {
+            margin: 12px 0;
+            font-size: 24px;
+            color: var(--primary-dark);
+            width: 100%;
+        }
+
+        .summary-item strong {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .summary-item .value {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .total-cost {
+            font-size: 24px;
+            color: var(--primary-dark);
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+            width: 100%;
+        }
+
+        .total-cost strong {
+            font-weight: 600;
+            margin-right: 8px;
+            border-top: none;
+        }
+
+        .total-cost .value {
+            color: var(--primary-gold);
+            font-weight: 600;
+            border-top: none;
+        }
+
+        .cost-summary-header {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .monthly-payment {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        .monthly-payment strong {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .monthly-payment .value {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .financing-disclaimer {
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: var(--primary-dark);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .cost-summary-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .summary-details,
+            .total-container {
+                padding: 0;
+                margin: 0 auto;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .logo-container {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+            }
+        }
+
+        .custom-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .custom-text {
+            flex-grow: 1;
+            padding: 4px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            font-size: 13px;
+            color: var(--text-color);
+        }
+
+        .custom-text::placeholder {
+            color: #999;
+        }
+
+        .custom-price-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .dollar-sign {
+            color: var(--text-color);
+            font-size: 13px;
+        }
+
+        .custom-price {
+            width: 80px;
+            padding: 4px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            font-size: 13px;
+        }
+
+        .custom-price::placeholder {
+            color: #999;
+        }
+    </style>
     <script>
         // Check if logged in
         if (localStorage.getItem('orcaLoggedIn') !== 'true') {
@@ -16,9 +216,11 @@
     <div class="container">
         <header class="site-header">
             <div class="logo">
-                <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+                <a href="../../trades.html">
+                    <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+                </a>
             </div>
-            <h1>Orca Roofing & Exteriors Decks Calculator</h1>
+            <h1>Deck Calculator</h1>
             <button class="reset-button" onclick="resetCalculator()">Reset</button>
         </header>
         
@@ -57,15 +259,11 @@
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="firstLevel" value="timberTechPrime" data-price="59">
-                            <span>TimberTech - Prime Plus ($59/SF)</span>
+                            <span>TimberTech - Composite ($59/SF)</span>
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="firstLevel" value="timberTechLandmark" data-price="71">
-                            <span>TimberTech - Landmark ($71/SF)</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="firstLevel" value="timberTechVintage" data-price="81">
-                            <span>TimberTech - Vintage PVC ($81/SF)</span>
+                            <input type="radio" name="firstLevel" value="timberTechVintage" data-price="76">
+                            <span>Azek - PVC ($76/SF)</span>
                         </label>
                     </div>
                 </div>
@@ -90,16 +288,16 @@
                             <span>Composite ($151/LF)</span>
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="railing" value="aluminum" data-price="153">
-                            <span>Aluminum ($153/LF)</span>
+                            <input type="radio" name="railing" value="aluminum" data-price="173">
+                            <span>Aluminum ($173/LF)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="railing" value="cableAluminum" data-price="181">
+                            <span>Cable + Aluminum Posts ($181/LF)</span>
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="railing" value="glass" data-price="208">
                             <span>Glass ($208/LF)</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="railing" value="cableAluminum" data-price="213">
-                            <span>Cable + Aluminum Posts ($213/LF)</span>
                         </label>
                     </div>
                 </div>
@@ -107,7 +305,7 @@
 
             <div class="right-column">
                 <div class="section">
-                    <h2>Framing & Options <span class="section-total" id="optionsTotal">$0.00</span></h2>
+                    <h2>Framing <span class="section-total" id="optionsTotal">$0.00</span></h2>
                     <div class="form-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="pressureTreated" data-price="26">
@@ -133,6 +331,13 @@
                             <input type="checkbox" id="permits" data-price="4000">
                             <span>Plans & Permits ($4,000)</span>
                         </label>
+                        <div class="custom-option">
+                            <input type="text" class="custom-text" placeholder="Custom Option">
+                            <div class="custom-price-wrapper">
+                                <span class="dollar-sign">$</span>
+                                <input type="number" class="custom-price" placeholder="0">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -149,31 +354,63 @@
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="secondLevel" value="timberTechPrime2" data-price="69">
-                            <span>TimberTech - Prime Plus ($69/SF)</span>
+                            <span>TimberTech - Composite ($69/SF)</span>
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="secondLevel" value="timberTechLandmark2" data-price="81">
-                            <span>TimberTech - Landmark ($81/SF)</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="secondLevel" value="timberTechVintage2" data-price="91">
-                            <span>TimberTech - Vintage PVC ($91/SF)</span>
+                            <input type="radio" name="secondLevel" value="timberTechVintage2" data-price="86">
+                            <span>Azek - PVC ($86/SF)</span>
                         </label>
                     </div>
                 </div>
 
-                <div class="section cost-summary">
-                    <div class="section-header">
-                        <h2>Cost Breakdown</h2>
-                    </div>
-                    <div id="result">
-                        <p class="summary-item"><strong>Total Square Footage:</strong> <span class="value">0 SF</span></p>
-                        <p class="summary-item"><strong>Total Railing Length:</strong> <span class="value">0 LF</span></p>
-                        <p class="summary-item"><strong>Number of Steps:</strong> <span class="value">0</span></p>
-                        <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">$0.00</span></p>
+                <div class="section">
+                    <h2>Additional Options <span class="section-total" id="additionalOptionsTotal">$0.00</span></h2>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="paintDeck" data-price="18">
+                            <span>Paint/Stain Deck ($18/SF)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="paintRailings" data-price="26">
+                            <span>Paint/Stain Cedar Railings ($26/LF)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="cableHardware" data-price="30">
+                            <span>Cable Railings - Black Oxide ($30/LF)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="cableRods" data-price="45">
+                            <span>Cable Railings - Rods ($45/LF)</span>
+                        </label>
+                        <div class="custom-option">
+                            <input type="text" class="custom-text" id="additionalCustomText" placeholder="Custom Option">
+                            <div class="custom-price-wrapper">
+                                <span class="dollar-sign">$</span>
+                                <input type="number" class="custom-price" id="additionalCustomPrice" placeholder="0">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="section cost-summary">
+            <h2 class="cost-summary-header">Cost Summary</h2>
+            <div class="cost-summary-grid">
+                <div class="summary-details">
+                    <p class="summary-item"><strong>Total Square Footage:</strong> <span class="value">0 SF</span></p>
+                    <p class="summary-item"><strong>Total Railing Length:</strong> <span class="value">0 LF</span></p>
+                    <p class="summary-item"><strong>Number of Steps:</strong> <span class="value">0</span></p>
+                </div>
+                <div class="logo-container">
+                    <div class="whale-tail"></div>
+                </div>
+                <div class="total-container">
+                    <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">$0.00</span></p>
+                    <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">$0.00</span></p>
+                </div>
+            </div>
+            <p class="financing-disclaimer">*$0 down, 10 year term, 9.99% interest. Subject to approval.</p>
         </div>
     </div>
 
@@ -206,16 +443,18 @@
             let secondLevelTotal = secondFloorSF * secondLevelPrice;
             let railingsTotal = railingLF * railingPrice;
             let optionsTotal = calculateOptionsTotal(firstFloorSF, secondFloorSF, steps);
+            let additionalOptionsTotal = calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF);
 
             // Update section totals
             document.getElementById('firstLevelTotal').textContent = formatPrice(firstLevelTotal);
             document.getElementById('secondLevelTotal').textContent = formatPrice(secondLevelTotal);
             document.getElementById('railingsTotal').textContent = formatPrice(railingsTotal);
             document.getElementById('optionsTotal').textContent = formatPrice(optionsTotal);
+            document.getElementById('additionalOptionsTotal').textContent = formatPrice(additionalOptionsTotal);
 
             // Update cost breakdown
             updateCostBreakdown(firstFloorSF, secondFloorSF, railingLF, steps, 
-                              firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal);
+                              firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal + additionalOptionsTotal);
         }
 
         function getSelectedRadioPrice(name) {
@@ -248,7 +487,7 @@
 
             // Water Catch System
             if (document.getElementById('rainEscape').checked) {
-                total += secondFloorSF * 28;
+                total += (firstFloorSF + secondFloorSF) * 28;
             }
 
             // Permits
@@ -256,19 +495,54 @@
                 total += 4000;
             }
 
+            // Custom Option (Framing)
+            const customPrice = parseFloat(document.querySelector('.custom-price').value) || 0;
+            total += customPrice;
+
+            return total;
+        }
+
+        function calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF) {
+            let total = 0;
+            const totalSF = firstFloorSF + secondFloorSF;
+
+            // Paint/Stain options
+            if (document.getElementById('paintDeck').checked) {
+                total += totalSF * 18;
+            }
+            if (document.getElementById('paintRailings').checked) {
+                total += railingLF * 26;
+            }
+            if (document.getElementById('cableHardware').checked) {
+                total += railingLF * 30;
+            }
+            if (document.getElementById('cableRods').checked) {
+                total += railingLF * 45;
+            }
+
+            // Custom Option (Additional Options)
+            const additionalCustomPrice = parseFloat(document.getElementById('additionalCustomPrice').value) || 0;
+            total += additionalCustomPrice;
+
             return total;
         }
 
         function updateCostBreakdown(firstFloorSF, secondFloorSF, railingLF, steps, 
                                    firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal) {
             const totalCost = firstLevelTotal + secondLevelTotal + railingsTotal + optionsTotal;
-            const result = document.getElementById('result');
+            const monthlyPayment = totalCost * 0.0132;
+            const summaryDetails = document.querySelector('.summary-details');
+            const totalContainer = document.querySelector('.total-container');
 
-            result.innerHTML = `
+            summaryDetails.innerHTML = `
                 <p class="summary-item"><strong>Total Square Footage:</strong> <span class="value">${firstFloorSF + secondFloorSF} SF</span></p>
                 <p class="summary-item"><strong>Total Railing Length:</strong> <span class="value">${railingLF} LF</span></p>
                 <p class="summary-item"><strong>Number of Steps:</strong> <span class="value">${steps}</span></p>
+            `;
+
+            totalContainer.innerHTML = `
                 <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">${formatPrice(totalCost)}</span></p>
+                <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">${formatPrice(monthlyPayment)}</span></p>
             `;
         }
 

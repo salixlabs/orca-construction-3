@@ -24,7 +24,7 @@ body {
 .container {
     width: 100%;
     max-width: 100%;
-    padding: 16px;
+    padding: 12px;
     margin: 0;
     box-sizing: border-box;
 }
@@ -43,16 +43,23 @@ body {
 
 .site-header {
     width: 100%;
-    padding: 16px 0;
-    margin-bottom: 24px;
+    padding: 12px 0;
+    margin-bottom: 8px;
     text-align: center;
     box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
-    width: 100px;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
     height: auto;
-    flex-shrink: 0;
 }
 
 .logo a {
@@ -63,9 +70,9 @@ body {
 }
 
 .logo img {
-    max-width: 240px;
+    max-width: 100%;
     height: auto;
-    margin-bottom: 16px;
+    margin: 0;
 }
 
 .site-header h1 {
@@ -96,10 +103,14 @@ h3 {
 
 .section {
     background-color: white;
-    padding: 6px;
-    margin-bottom: 6px;
     border-radius: 4px;
     border: 1px solid var(--border-color);
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 /* Make measurements section span full width */
@@ -114,15 +125,16 @@ h3 {
 }
 
 .form-group {
-    margin-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    flex: 1;
 }
 
 label {
-    display: block;
-    margin-bottom: 2px;
-    color: var(--primary-dark);
-    font-size: 14px;
-    font-weight: normal;
+    margin: 0;
+    line-height: 1.2;
 }
 
 input[type="number"] {
@@ -138,15 +150,21 @@ input[type="number"] {
     margin-bottom: 4px;
 }
 
-.radio-label {
-    display: flex !important;
+.radio-label,
+.checkbox-label {
+    display: flex;
     align-items: center;
+    gap: 8px;
     padding: 6px 0;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 32px;
+    margin: 0;
 }
 
-.radio-label span {
-    margin-left: 8px;
+.radio-label span,
+.checkbox-label span {
     font-size: 13px;
     line-height: 1.2;
 }
@@ -220,9 +238,13 @@ button:hover {
 /* Tablet and smaller screens */
 @media (max-width: 768px) {
     .container {
-        padding: 12px;
+        padding: 8px;
     }
     
+    .logo {
+        left: 8px;
+    }
+
     .measurements .form-group {
         grid-template-columns: 1fr 1fr;
     }
@@ -231,21 +253,92 @@ button:hover {
     .bottom-row {
         grid-template-columns: 1fr;
     }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    
+    .section {
+        padding: 10px;
+        height: auto;
+    }
+
+    .cost-summary {
+        margin-top: 4px;
+        padding: 12px;
+    }
+
+    .reset-button {
+        right: 8px;
+    }
+
+    .left-column,
+    .right-column {
+        gap: 4px;
+    }
+
+    .section:has(> h2:first-child:contains("Measurements")) {
+        margin-bottom: 4px;
+    }
 }
 
 /* Even smaller screens */
 @media (max-width: 480px) {
+    .container {
+        padding: 6px;
+    }
+    
+    .logo {
+        left: 6px;
+    }
+
     .measurements .form-group {
         grid-template-columns: 1fr;
+    }
+
+    .main-layout {
+        gap: 3px;
+    }
+    
+    .section {
+        padding: 8px;
+        height: auto;
+    }
+
+    .cost-summary {
+        margin-top: 3px;
+        padding: 10px;
+    }
+
+    .reset-button {
+        right: 6px;
+    }
+
+    .left-column,
+    .right-column {
+        gap: 3px;
+    }
+
+    .section:has(> h2:first-child:contains("Measurements")) {
+        margin-bottom: 3px;
     }
 }
 
 .cost-summary {
     background-color: #e5dacc;
     position: relative;
-    padding: 24px;
+    padding: 16px;
     border-radius: 8px;
     overflow: hidden;
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    background-color: var(--primary-light);
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
 }
 
 .cost-summary::before {
@@ -296,9 +389,8 @@ button:hover {
 }
 
 .cost-summary .total-cost {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 2px solid rgba(187, 148, 91, 0.3);
+    margin-top: 0;
+    padding-top: 0;
     font-size: 20px;
     color: var(--primary-dark);
 }
@@ -317,7 +409,9 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .section-header h2 {
@@ -378,8 +472,9 @@ button:hover {
 
 .reset-button {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
     padding: 8px 16px;
     font-size: 14px;
     z-index: 1;
@@ -389,9 +484,11 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px solid var(--border-color);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .custom-text {
@@ -605,250 +702,49 @@ li {
 /* Main layout structure */
 .main-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    width: 100%;
-    margin: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
     padding: 0;
-    box-sizing: border-box;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    align-items: stretch;
 }
 
+/* Column styles */
 .left-column,
 .right-column {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    min-width: 0; /* Prevent flex items from overflowing */
+    display: grid;
+    gap: 6px;
+    align-items: stretch;
 }
 
-/* Section styles */
-.section {
-    background-color: white;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden; /* Prevent content overflow */
+/* Measurements section - ensure it spans full width */
+.section:has(> h2:first-child:contains("Measurements")) {
+    grid-column: 1 / -1;
+    margin-bottom: 6px;
+    height: auto;
 }
 
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.section-header h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--primary-dark);
-}
-
-.section-total {
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--primary-gold);
-}
-
-/* Form styles */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.form-group label {
-    font-size: 16px;
-    color: var(--primary-dark);
-}
-
-.form-group input[type="number"],
-.custom-text,
-.custom-price {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-/* Radio and checkbox styles */
-.radio-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.radio-label input[type="radio"],
-.radio-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-}
-
-.radio-label span {
-    font-size: 16px;
-    color: var(--primary-dark);
-    flex: 1;
-    min-width: 0; /* Allow text to wrap */
-    word-wrap: break-word;
-}
-
-/* Custom option styles */
-.custom-option {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-color);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.custom-price-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    min-width: 120px;
-}
-
-.dollar-sign {
-    font-size: 16px;
-    color: var(--primary-dark);
-}
-
-/* Cost summary styles */
+/* Cost summary section - ensure it spans full width */
 .cost-summary {
+    grid-column: 1 / -1;
+    margin-top: 6px;
     background-color: var(--primary-light);
-    margin-top: auto;
+    padding: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
 }
 
-.cost-summary h2 {
-    color: var(--primary-dark);
-    margin-bottom: 16px;
-}
-
-#result {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-#result p {
-    margin: 8px 0;
-}
-
-#result strong {
-    color: var(--primary-dark);
-}
-
-/* Responsive styles */
-@media (max-width: 1024px) {
-    .container {
-        padding: 12px;
-    }
-    
-    .main-layout {
-        gap: 12px;
-    }
-    
-    .section {
-        padding: 16px;
-    }
-    
-    .section-header h2,
-    .section-total {
-        font-size: 16px;
-    }
-    
-    .form-group label,
-    .radio-label span,
-    .custom-text,
-    .custom-price,
-    .dollar-sign {
-        font-size: 14px;
-    }
-    
-    .form-group input[type="number"] {
-        padding: 8px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 12px;
-    }
-    
-    .main-layout {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .section {
-        padding: 16px;
-    }
-    
-    .section-header h2,
-    .section-total {
-        font-size: 16px;
-    }
-    
-    .form-group label,
-    .radio-label span,
-    .custom-text,
-    .custom-price,
-    .dollar-sign {
-        font-size: 14px;
-    }
-    
-    .form-group input[type="number"] {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    /* Ensure proper stacking of custom option inputs on mobile */
-    .custom-option {
-        flex-direction: column;
-        gap: 8px;
-        align-items: stretch;
-    }
-
-    .custom-price-wrapper {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .site-header h1 {
-        font-size: 20px;
-    }
-
-    .logo img {
-        max-width: 200px;
-    }
-
-    .section {
-        padding: 12px;
-    }
-
-    .reset-button {
-        position: static;
-        margin: 16px auto;
-        display: block;
-    }
+/* Remove any previous grid area assignments */
+.section:has(> h2:first-child:contains("Ground Level Decking")),
+.section:has(> h2:first-child:contains("Railings")),
+.section:has(> h2:first-child:contains("Framing")),
+.section:has(> h2:first-child:contains("Second Story Decking")),
+.section:has(> h2:first-child:contains("Additional Options")) {
+    grid-area: unset;
 }
 
 .photo-link {
@@ -866,4 +762,47 @@ li {
 .photo-link:hover {
     background-color: var(--primary-gold);
     color: white;
+}
+
+/* Measurements specific styles */
+.section:has(> h2:first-child:contains("Measurements")) {
+    padding: 24px 16px;
+    grid-column: 1 / -1;
+}
+
+.section:has(> h2:first-child:contains("Measurements")) .form-group {
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.section:has(> h2:first-child:contains("Measurements")) input[type="number"] {
+    height: 36px;
+    margin: 4px 0;
+}
+
+/* Framing specific styles */
+.section:has(> h2:first-child:contains("Framing")) {
+    padding: 16px;
+}
+
+.section:has(> h2:first-child:contains("Framing")) .checkbox-label {
+    padding: 4px 0;
+    min-height: 28px;
+}
+
+.section:has(> h2:first-child:contains("Framing")) .custom-option {
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+.section:has(> h2:first-child:contains("Measurements")) .form-group {
+    gap: 8px;
+    margin-bottom: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
 } 

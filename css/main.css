@@ -28,23 +28,128 @@ body {
     padding: 20px;
 }
 
-/* Header styles */
-.site-header {
-    text-align: center;
-    margin-bottom: 30px;
+/* Header and logo styles */
+.content-header {
     position: relative;
+    width: 100%;
+    padding: 16px 0;
+    margin-bottom: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logo img {
-    max-width: 240px;
+.content-header img {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
     height: auto;
-    margin-bottom: 20px;
 }
 
-.site-header h1 {
+.content-header h1 {
     font-size: 24px;
-    font-weight: 500;
     color: var(--text-color);
+    margin: 0;
+    padding: 0 180px;
+}
+
+/* Button grid layout */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navigation button styles */
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-button img {
+    width: 64px;
+    height: auto;
+    margin-bottom: 16px;
+    opacity: 0.8;
+}
+
+.nav-button h2 {
+    font-size: 20px;
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+    border: none;
+    padding: 0;
+}
+
+.nav-button p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Logout button */
+.logout-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    background-color: var(--primary-gold);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.logout-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Back button */
+.back-button {
+    position: absolute;
+    top: 16px;
+    right: 120px;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.back-button:hover {
+    background-color: var(--primary-gold);
+    color: white;
 }
 
 /* Main layout */
@@ -159,8 +264,56 @@ input[type="number"] {
     text-transform: uppercase;
 }
 
-/* Responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
+    .content-header {
+        padding: 12px 0;
+        margin-bottom: 16px;
+    }
+
+    .content-header img {
+        width: 120px;
+        left: 12px;
+    }
+
+    .content-header h1 {
+        font-size: 20px;
+        padding: 0 140px;
+    }
+
+    .button-grid {
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .nav-button {
+        padding: 24px;
+    }
+
+    .nav-button img {
+        width: 48px;
+        margin-bottom: 12px;
+    }
+
+    .nav-button h2 {
+        font-size: 18px;
+    }
+
+    .nav-button p {
+        font-size: 13px;
+    }
+
+    .logout-button,
+    .back-button {
+        top: 12px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .back-button {
+        right: 100px;
+    }
+
     .main-layout {
         grid-template-columns: 1fr;
     }
@@ -184,6 +337,55 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+    .content-header {
+        padding: 8px 0;
+        margin-bottom: 12px;
+    }
+
+    .content-header img {
+        width: 100px;
+        left: 8px;
+    }
+
+    .content-header h1 {
+        font-size: 18px;
+        padding: 0 110px;
+    }
+
+    .button-grid {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .nav-button {
+        padding: 20px;
+    }
+
+    .nav-button img {
+        width: 40px;
+        margin-bottom: 10px;
+    }
+
+    .nav-button h2 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .nav-button p {
+        font-size: 12px;
+    }
+
+    .logout-button,
+    .back-button {
+        top: 8px;
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .back-button {
+        right: 90px;
+    }
+
     .site-header h1 {
         font-size: 18px;
     }
