@@ -349,10 +349,6 @@ button:hover {
     transform: translate(-50%, -50%);
     width: 180px;
     height: 180px;
-    background-image: url('../../Assets/logo/ORE-tail.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     opacity: 0.15;
     pointer-events: none;
 }
