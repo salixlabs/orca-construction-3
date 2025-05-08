@@ -1,0 +1,398 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #f5f3f0;
+    --section-background: #ffffff;
+    --border-color: #e2e2e2;
+    --text-color: #333333;
+    --primary-gold: #c4a77d;
+    --section-padding: 20px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and logo styles */
+.content-header {
+    position: relative;
+    width: 100%;
+    padding: 16px 0;
+    margin-bottom: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-header img {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: auto;
+}
+
+.content-header h1 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0 180px;
+}
+
+/* Button grid layout */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navigation button styles */
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-button img {
+    width: 64px;
+    height: auto;
+    margin-bottom: 16px;
+    opacity: 0.8;
+}
+
+.nav-button h2 {
+    font-size: 20px;
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+    border: none;
+    padding: 0;
+}
+
+.nav-button p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Logout button */
+.logout-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    background-color: var(--primary-gold);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.logout-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Back button */
+.back-button {
+    position: absolute;
+    top: 16px;
+    right: 120px;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.back-button:hover {
+    background-color: var(--primary-gold);
+    color: white;
+}
+
+/* Main layout */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Section styles */
+.section {
+    background: var(--section-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--section-padding);
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Radio and checkbox groups */
+.radio-label,
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    padding: 8px 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+.radio-label span,
+.checkbox-label span {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Price display */
+.section-total {
+    color: var(--primary-gold);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Cost summary section */
+.cost-summary {
+    background-color: var(--background-color);
+}
+
+.cost-summary h2 {
+    color: var(--text-color);
+}
+
+#result {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#result p {
+    margin: 8px 0;
+}
+
+/* Reset button */
+.reset-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px 16px;
+    background-color: var(--primary-gold);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-header {
+        padding: 12px 0;
+        margin-bottom: 16px;
+    }
+
+    .content-header img {
+        width: 120px;
+        left: 12px;
+    }
+
+    .content-header h1 {
+        font-size: 20px;
+        padding: 0 140px;
+    }
+
+    .button-grid {
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .nav-button {
+        padding: 24px;
+    }
+
+    .nav-button img {
+        width: 48px;
+        margin-bottom: 12px;
+    }
+
+    .nav-button h2 {
+        font-size: 18px;
+    }
+
+    .nav-button p {
+        font-size: 13px;
+    }
+
+    .logout-button,
+    .back-button {
+        top: 12px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .back-button {
+        right: 100px;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .section {
+        padding: 15px;
+    }
+    
+    .site-header h1 {
+        font-size: 20px;
+        padding: 0 50px;
+    }
+    
+    .logo img {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-header {
+        padding: 8px 0;
+        margin-bottom: 12px;
+    }
+
+    .content-header img {
+        width: 100px;
+        left: 8px;
+    }
+
+    .content-header h1 {
+        font-size: 18px;
+        padding: 0 110px;
+    }
+
+    .button-grid {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .nav-button {
+        padding: 20px;
+    }
+
+    .nav-button img {
+        width: 40px;
+        margin-bottom: 10px;
+    }
+
+    .nav-button h2 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .nav-button p {
+        font-size: 12px;
+    }
+
+    .logout-button,
+    .back-button {
+        top: 8px;
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .back-button {
+        right: 90px;
+    }
+
+    .site-header h1 {
+        font-size: 18px;
+    }
+    
+    .reset-button {
+        position: static;
+        margin: 15px auto;
+        display: block;
+    }
+} 

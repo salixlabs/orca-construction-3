@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Construction - Decking</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <div class="content-header">
+            <a href="../../trades.html">
+                <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+            </a>
+            <h1>Decking</h1>
+        </div>
+        <div class="button-grid">
+            <a href="calculator.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Deck Calculator">
+                <h2>Deck Calculator</h2>
+                <p>Calculate costs for deck construction including materials, labor, and additional features</p>
+            </a>
+            <a href="gallery/index.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Deck Gallery">
+                <h2>Deck Gallery</h2>
+                <p>Browse our collection of deck projects, materials, and design options</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html> 

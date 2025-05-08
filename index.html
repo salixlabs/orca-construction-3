@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orca Construction</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <style>
         body {
             margin: 0;
@@ -62,96 +63,12 @@
         .login-form button:hover {
             background-color: #b39871;
         }
-
-        /* Calculator Selection Styles */
-        .calculator-container {
-            display: none;
-            width: 90%;
-            max-width: 1000px;
-            text-align: center;
-        }
-        .calculator-header {
-            margin-bottom: 3rem;
-        }
-        .calculator-header img {
-            width: 240px;
-            margin-bottom: 1rem;
-        }
-        .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 0 auto;
-        }
-        .calculator-button {
-            background: white;
-            border: none;
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            text-decoration: none;
-            color: inherit;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-        }
-        .calculator-button:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 16px rgba(187,148,91,0.2);
-        }
-        .calculator-button img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-            object-fit: contain;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        .calculator-button:hover img {
-            opacity: 1;
-        }
-        .calculator-button h2 {
-            color: var(--primary-dark);
-            margin: 0 0 1rem 0;
-            font-size: 1.5rem;
-        }
-        .calculator-button p {
-            color: var(--text-color);
-            margin: 0;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        .logout-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background-color: #c4a77d;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .logout-button:hover {
-            background-color: #b39871;
-        }
-
-        @media (max-width: 768px) {
-            .calculator-buttons {
-                grid-template-columns: 1fr;
-            }
-            .calculator-button {
-                padding: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Login Screen -->
     <div class="login-container" id="loginContainer">
-        <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo" class="login-logo">
+        <img src="Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo" class="login-logo">
         <div class="login-form">
             <input type="text" placeholder="Username" id="username" required>
             <input type="password" placeholder="Password" id="password" required>
@@ -159,22 +76,22 @@
         </div>
     </div>
 
-    <!-- Calculator Selection Screen -->
-    <div class="calculator-container" id="calculatorContainer">
+    <!-- Trades Selection Screen -->
+    <div class="container" id="calculatorContainer" style="display: none;">
         <button class="logout-button" onclick="logout()">Logout</button>
-        <div class="calculator-header">
-            <img src="Assets/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+        <div class="content-header">
+            <img src="Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
         </div>
-        <div class="calculator-buttons">
-            <a href="decks-calculator.html" class="calculator-button">
-                <img src="Assets/ORE-tail.png" alt="Deck Calculator">
-                <h2>Deck Calculator</h2>
-                <p>Calculate costs for deck construction including materials, labor, and additional features.</p>
+        <div class="button-grid">
+            <a href="trades/roofing/index.html" class="nav-button">
+                <img src="Assets/logo/ORE-tail.png" alt="Roofing">
+                <h2>Roofing</h2>
+                <p>Access roofing calculators and photo galleries</p>
             </a>
-            <a href="ventilation-calculator.html" class="calculator-button">
-                <img src="Assets/ORE-tail.png" alt="Ventilation Calculator">
-                <h2>Ventilation Calculator</h2>
-                <p>Determine the proper ventilation requirements for your attic based on square footage and building codes.</p>
+            <a href="trades/decking/index.html" class="nav-button">
+                <img src="Assets/logo/ORE-tail.png" alt="Decking">
+                <h2>Decking</h2>
+                <p>Access deck calculators and photo galleries</p>
             </a>
         </div>
     </div>
