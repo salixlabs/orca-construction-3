@@ -204,7 +204,7 @@
           <div class="section">
             <h2>Measurements - Roofing</h2>
             <div class="form-group">
-              <label for="roofArea">Roof Area (sqft):</label>
+              <label for="roofArea">Roof Area (squares):</label>
               <input type="number" id="roofArea" required>
             </div>
             <div class="form-group">
@@ -218,10 +218,6 @@
             <div class="form-group">
               <label for="valleys">Valleys (LF):</label>
               <input type="number" id="valleys" required>
-            </div>
-            <div class="form-group">
-              <label for="hips">Hips (LF):</label>
-              <input type="number" id="hips" required>
             </div>
             <div class="form-group">
               <label for="stories">Stories (#):</label>
@@ -474,11 +470,13 @@
     });
     function calculateTotal() {
       console.log('calculateTotal triggered');
-      const roofArea = parseFloat(document.getElementById('roofArea').value) || 0;
-      const pitch = parseFloat(document.getElementById('pitch').value) || 0;
+      // Interpret roofArea as squares, convert to sqft for calculations
+      const roofAreaSquares = parseFloat(document.getElementById('roofArea').value) || 0;
+      const roofArea = roofAreaSquares * 100;
+      let pitch = parseFloat(document.getElementById('pitch').value);
+      if (isNaN(pitch) || pitch === 0) pitch = 4;
       const facets = parseFloat(document.getElementById('facets').value) || 0;
       const valleys = parseFloat(document.getElementById('valleys').value) || 0;
-      const hips = parseFloat(document.getElementById('hips').value) || 0;
       const rakes = parseFloat(document.getElementById('rakes').value) || 0;
       const stories = document.getElementById('stories').value;
       const existingLayers = parseInt(document.getElementById('existingLayers').value) || 1;
@@ -492,10 +490,19 @@
 
       let mobilization = document.getElementById('mobilization').checked ? 1500 : 0;
       let accessCost = (document.getElementById('accessHandLoad').checked && access === 'Hand Load') ? roofArea * 0.5 : 0;
-      let tearoff1 = document.getElementById('tearoff1').checked ? roofArea * 1.2 : 0;
-      let tearoffAdditional = document.getElementById('tearoffAdditional').checked ? roofArea * Math.max(0, (existingLayers - 1)) * 0.4 : 0;
-      let mobilizationTotal = mobilization + accessCost + tearoff1 + tearoffAdditional;
+      let tearoff1 = document.getElementById('tearoff1').checked ? roofAreaSquares * 110 : 0;
+      let tearoffAdditional = document.getElementById('tearoffAdditional').checked ? roofAreaSquares * Math.max(0, (existingLayers - 1)) * 35 : 0;
+      let roofTypeCost = 0;
+      const roofTypeCheckbox = document.getElementById('roofTypeCheckbox');
+      if (existingType === 'Tile' || existingType === 'Shake') {
+        roofTypeCost = roofAreaSquares * 60;
+        roofTypeCheckbox.checked = true;
+      } else {
+        roofTypeCheckbox.checked = false;
+      }
+      let mobilizationTotal = mobilization + accessCost + tearoff1 + tearoffAdditional + roofTypeCost;
       document.getElementById('mobilizationTotal').textContent = formatPrice(mobilizationTotal);
+      document.getElementById('roofTypeCost').textContent = formatPrice(roofTypeCost);
 
       // Gutters
       let guttersTotal = 0;
@@ -515,12 +522,13 @@
 
       // Insulation
       let insulationTotal = 0;
-      const insulationArea = roofArea / (1 + (0.3 * pitch));
+      // Use attic area in squares, not sqft
+      const atticAreaSquares = roofAreaSquares / (1 + (0.03 * pitch));
       if (document.getElementById('removeAtticInsulation').checked) {
-        insulationTotal += insulationArea * 92 * 3.5;
+        insulationTotal += atticAreaSquares * 0.92 * 250;
       }
       if (document.getElementById('blowInInsulation').checked) {
-        insulationTotal += insulationArea * 92 * 2.5;
+        insulationTotal += atticAreaSquares * 0.92 * 350;
       }
       document.getElementById('insulationTotal').textContent = formatPrice(insulationTotal);
 
@@ -540,7 +548,7 @@
       // Warranty
       let warrantyTotal = 0;
       if (document.getElementById('sureStartWarranty').checked) {
-        warrantyTotal -= 80 * roofArea;
+        warrantyTotal -= 80 * roofAreaSquares;
       }
       // ORCA 5 year workmanship is $0, so no addition needed
       document.getElementById('warrantyTotal').textContent = formatPrice(warrantyTotal);
