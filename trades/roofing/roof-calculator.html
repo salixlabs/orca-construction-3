@@ -179,6 +179,162 @@
     .custom-price::placeholder {
       color: #999;
     }
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .form-group label {
+      min-width: 160px;
+      margin-right: 8px;
+      font-size: 14px;
+    }
+
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group select {
+      width: 160px;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-size: 14px;
+      height: 28px;
+    }
+
+    /* Remove default number input spinners */
+    .form-group input[type="number"]::-webkit-inner-spin-button,
+    .form-group input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .form-group input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* Custom select styling */
+    .form-group select {
+      background-color: white;
+      appearance: none;
+      padding-right: 24px;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 8px;
+    }
+
+    .form-group select {
+      background-color: white;
+    }
+
+    /* Update checkbox and radio layouts */
+    .checkbox-label,
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"],
+    .radio-label input[type="radio"] {
+      margin: 0;
+    }
+
+    .checkbox-label span,
+    .radio-label span {
+      flex: 1;
+    }
+
+    /* Section headers with totals */
+    .section h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-total {
+      font-size: 0.9em;
+      color: var(--primary-gold);
+    }
+
+    /* Base styles */
+    .section {
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: var(--primary-dark);
+    }
+
+    /* Table layout styles */
+    .form-table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    .form-table tr {
+      height: 32px;
+    }
+
+    .form-table td {
+      padding: 2px 4px;
+      vertical-align: middle;
+    }
+
+    .form-table td:first-child {
+      width: 160px;
+      white-space: nowrap;
+    }
+
+    .form-table label {
+      font-size: 14px;
+      color: var(--primary-dark);
+    }
+
+    .form-table input[type="number"],
+    .form-table input[type="text"],
+    .form-table select {
+      width: 160px;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-size: 14px;
+      height: 28px;
+    }
+
+    /* Remove default number input spinners */
+    .form-table input[type="number"]::-webkit-inner-spin-button,
+    .form-table input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .form-table input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* Custom select styling */
+    .form-table select {
+      background-color: white;
+      appearance: none;
+      padding-right: 24px;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 8px;
+    }
   </style>
   <script>
     // Check if logged in
@@ -203,99 +359,115 @@
         <div class="left-column">
           <div class="section">
             <h2>Measurements - Roofing</h2>
-            <div class="form-group">
-              <label for="roofArea">Roof Area (squares):</label>
-              <input type="number" id="roofArea" required>
-            </div>
-            <div class="form-group">
-              <label for="pitch">Pitch (/12):</label>
-              <input type="number" id="pitch" required>
-            </div>
-            <div class="form-group">
-              <label for="facets">Facets (#):</label>
-              <input type="number" id="facets" required>
-            </div>
-            <div class="form-group">
-              <label for="valleys">Valleys (LF):</label>
-              <input type="number" id="valleys" required>
-            </div>
-            <div class="form-group">
-              <label for="stories">Stories (#):</label>
-              <select id="stories">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="existingLayers">Existing Layers (#):</label>
-              <select id="existingLayers">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="existingType">Existing Type (#):</label>
-              <select id="existingType">
-                <option value="Shingles">Shingles</option>
-                <option value="Tile">Tile</option>
-                <option value="Shake">Shake</option>
-                <option value="Metal">Metal</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="access">Access:</label>
-              <select id="access">
-                <option value="Roof Drop">Roof Drop</option>
-                <option value="Hand Load">Hand Load</option>
-              </select>
-            </div>
+            <table class="form-table">
+              <tr>
+                <td><label for="roofArea">Roof Area (squares):</label></td>
+                <td><input type="number" id="roofArea" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="pitch">Pitch (/12):</label></td>
+                <td><input type="number" id="pitch" placeholder="4" required></td>
+              </tr>
+              <tr>
+                <td><label for="facets">Facets (#):</label></td>
+                <td><input type="number" id="facets" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="valleys">Valleys (LF):</label></td>
+                <td><input type="number" id="valleys" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="stories">Stories (#):</label></td>
+                <td><select id="stories">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td><label for="existingLayers">Existing Layers (#):</label></td>
+                <td><select id="existingLayers">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td><label for="existingType">Existing Type (#):</label></td>
+                <td><select id="existingType">
+                  <option value="Shingles">Shingles</option>
+                  <option value="Tile">Tile</option>
+                  <option value="Shake">Shake</option>
+                  <option value="Metal">Metal</option>
+                  <option value="Other">Other</option>
+                </select></td>
+              </tr>
+              <tr>
+                <td><label for="access">Access:</label></td>
+                <td><select id="access">
+                  <option value="Roof Drop">Roof Drop</option>
+                  <option value="Hand Load">Hand Load</option>
+                </select></td>
+              </tr>
+            </table>
           </div>
 
           <div class="section">
             <h2>Measurements - Gutters & Carpentry</h2>
-            <div class="form-group">
-              <label for="eaves">Eaves (LF):</label>
-              <input type="number" id="eaves" required>
-            </div>
-            <div class="form-group">
-              <label for="rakes">Rakes (LF):</label>
-              <input type="number" id="rakes" required>
-            </div>
-            <div class="form-group">
-              <label for="downspouts">Downspouts (#):</label>
-              <input type="number" id="downspouts" required>
-            </div>
+            <table class="form-table">
+              <tr>
+                <td><label for="eaves">Eaves (LF):</label></td>
+                <td><input type="number" id="eaves" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="rakes">Rakes (LF):</label></td>
+                <td><input type="number" id="rakes" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="downspouts">Downspouts (#):</label></td>
+                <td><input type="number" id="downspouts" placeholder="0" required></td>
+              </tr>
+              <tr>
+                <td><label for="skylights">Skylights (#):</label></td>
+                <td><input type="number" id="skylights" placeholder="0" required></td>
+              </tr>
+            </table>
           </div>
 
           <div class="section">
             <h2>Roof Covering <span class="section-total" id="roofCoveringTotal">$0.00</span></h2>
             <div class="form-group">
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="landmark" data-price="3.00">
-                    <span>Landmark ($3.00/SF)</span>
+                    <input type="radio" name="installType" value="pabco">
+                    <span>Pabco ($350/square)</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="northgate" data-price="3.60">
-                    <span>Northgate ($3.60/SF)</span>
+                    <input type="radio" name="installType" value="landmark">
+                    <span>Landmark ($550/square)</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="prezshake" data-price="4.00">
-                    <span>Prez Shake ($4.00/SF)</span>
+                    <input type="radio" name="installType" value="northgate">
+                    <span>Northgate ($650/square)</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="nuray26" data-price="8.00">
-                    <span>NuRay 26ga ($8.00/SF)</span>
+                    <input type="radio" name="installType" value="presidential">
+                    <span>Presidential Shake TL ($850/square)</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="nuray24" data-price="9.00">
-                    <span>NuRay 24ga ($9.00/SF)</span>
+                    <input type="radio" name="installType" value="nuray24">
+                    <span>NuRay 24ga Standing Seam ($1350/square)</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="installType" value="brava" data-price="12.00">
-                    <span>Brava ($12.00/SF)</span>
+                    <input type="radio" name="installType" value="bravaSlate">
+                    <span>Brava Tile - Slate ($1650/square)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="installType" value="bravaShake">
+                    <span>Brava Tile - Shake ($1750/square)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="installType" value="bravaSBT">
+                    <span>Brava Tile - SBT ($1950/square)</span>
                 </label>
             </div>
           </div>
@@ -306,20 +478,24 @@
             <h2>Tearoff & Mobilization <span class="section-total" id="mobilizationTotal">$0.00</span></h2>
             <div class="form-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" id="mobilization">
+                    <input type="checkbox" id="mobilization" disabled checked>
                     <span>Mobilization ($1,500)</span>
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="accessHandLoad">
-                    <span>Access (Hand Load, $0.50/sqft)</span>
+                    <input type="checkbox" id="accessHandLoad" disabled>
+                    <span>Access (Hand Load, $50/square)</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="tearoff1">
-                    <span>Tearoff (1 layer, $1.20/sqft)</span>
+                    <span>Tearoff (1 layer, $120/square)</span>
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="tearoffAdditional">
-                    <span>Tearoff (additional layers, $0.40/sqft/layer)</span>
+                    <input type="checkbox" id="tearoffAdditional" disabled>
+                    <span>Tearoff (additional layers, $40/square/layer)</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="roofTypeCheckbox" disabled>
+                  <span>Roof Type (Tile/Shake, $60/square)</span>
                 </label>
             </div>
           </div>
@@ -329,20 +505,20 @@
             <div class="form-group">
               <label class="checkbox-label">
                 <input type="checkbox" id="guttersDownspouts">
-                <span>5K Gutters + Downspouts</span>
+                <span>5K Gutters + Downspouts ($12/LF)</span>
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="gutters3x4Downspouts">
-                <span>6K Gutters + 3x4" Downspouts</span>
+                <span>6K Gutters + 3x4" Downspouts ($16/LF)</span>
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="guttersGuards">
-                <span>5K Gutter Guards</span>
+                <span>5K Gutter Guards ($14/LF)</span>
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="gutters6KGuards">
-                <span>6K Gutter Guards</span>
-              </label>
+                <span>6K Gutter Guards ($18/LF)</span>
+                </label>
             </div>
           </div>
 
@@ -379,15 +555,19 @@
           </div>
 
           <div class="section">
-            <h2>Warranty <span class="section-total" id="warrantyTotal">$0.00</span></h2>
+            <h2>Skylights <span class="section-total" id="skylightsTotal">$0.00</span></h2>
             <div class="form-group">
               <label class="checkbox-label">
-                <input type="checkbox" id="sureStartWarranty">
-                <span>CertainTeed SureStart Warranty</span>
+                <input type="checkbox" id="veluxReplace">
+                <span>Velux skylight replacement with Velux flashing ($650 each)</span>
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" id="workmanshipWarranty">
-                <span>ORCA Roofing & Exteriors 5 year workmanship</span>
+                <input type="checkbox" id="veluxCustom">
+                <span>Velux custom size skylights ($1800 each)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="veluxReflash">
+                <span>Reflash existing skylight with Velux flashing ($250 each)</span>
               </label>
             </div>
           </div>
@@ -407,6 +587,12 @@
                 <input type="checkbox" id="trussRepair">
                 <span>Truss repair or other carpentry work</span>
               </label>
+              <table class="form-table">
+                <tr>
+                  <td><label for="carpentryHours">Carpentry Repair Hours:</label></td>
+                  <td><input type="number" id="carpentryHours" value="0" placeholder="0"></td>
+                </tr>
+              </table>
             </div>
           </div>
 
@@ -453,7 +639,7 @@
             <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">$0.00</span></p>
           </div>
         </div>
-        <p class="financing-disclaimer">*$0 down, 10 year term, 9.99% interest. Subject to approval.</p>
+        <p class="financing-disclaimer">*$0 down, 12 year term, 8.99% interest. Subject to approval.</p>
       </div>
     </main>
   </div>
@@ -465,128 +651,246 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('input, select').forEach(el => {
         el.addEventListener('change', calculateTotal);
+        if (el.type === 'number' || el.type === 'text') {
+          el.addEventListener('input', calculateTotal);
+        }
+      });
+      // Explicitly add 'change' listeners for skylights input and checkboxes
+      ['skylights', 'veluxReplace', 'veluxCustom', 'veluxReflash'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', calculateTotal);
       });
       calculateTotal();
     });
     function calculateTotal() {
-      console.log('calculateTotal triggered');
-      // Interpret roofArea as squares, convert to sqft for calculations
-      const roofAreaSquares = parseFloat(document.getElementById('roofArea').value) || 0;
-      const roofArea = roofAreaSquares * 100;
-      let pitch = parseFloat(document.getElementById('pitch').value);
-      if (isNaN(pitch) || pitch === 0) pitch = 4;
-      const facets = parseFloat(document.getElementById('facets').value) || 0;
-      const valleys = parseFloat(document.getElementById('valleys').value) || 0;
-      const rakes = parseFloat(document.getElementById('rakes').value) || 0;
-      const stories = document.getElementById('stories').value;
-      const existingLayers = parseInt(document.getElementById('existingLayers').value) || 1;
-      const existingType = document.getElementById('existingType').value;
-      const access = document.getElementById('access').value;
-      const eaves = parseFloat(document.getElementById('eaves').value) || 0;
-      const downspouts = parseFloat(document.getElementById('downspouts').value) || 0;
-      let roofCoveringPrice = getSelectedRadioPrice('installType');
-      let roofCoveringTotal = roofArea * roofCoveringPrice;
-      document.getElementById('roofCoveringTotal').textContent = formatPrice(roofCoveringTotal);
+      try {
+        console.log('calculateTotal triggered');
+        // Interpret roofArea as squares, convert to sqft for calculations
+        const roofAreaSquares = parseFloat(document.getElementById('roofArea').value) || 0;
+        const roofArea = roofAreaSquares * 100;
+        let pitch = parseFloat(document.getElementById('pitch').value);
+        if (isNaN(pitch) || pitch === 0) pitch = 4;
+        const facets = parseFloat(document.getElementById('facets').value) || 0;
+        const valleys = parseFloat(document.getElementById('valleys').value) || 0;
+        const rakes = parseFloat(document.getElementById('rakes').value) || 0;
+        const stories = document.getElementById('stories').value;
+        const existingLayers = parseInt(document.getElementById('existingLayers').value) || 1;
+        const existingType = document.getElementById('existingType').value;
+        const access = document.getElementById('access').value;
+        const eaves = parseFloat(document.getElementById('eaves').value) || 0;
+        const downspouts = parseFloat(document.getElementById('downspouts').value) || 0;
+        const skylights = parseFloat(document.getElementById('skylights').value) || 0;
+        let roofCoveringPrice = 0;
+        let selectedRoofType = document.querySelector('input[name="installType"]:checked');
+        if (selectedRoofType) {
+          switch (selectedRoofType.value) {
+            case 'pabco':
+              roofCoveringPrice = 350;
+              break;
+            case 'landmark':
+              roofCoveringPrice = 550;
+              break;
+            case 'northgate':
+              roofCoveringPrice = 650;
+              break;
+            case 'presidential':
+              roofCoveringPrice = 850;
+              break;
+            case 'nuray24':
+              roofCoveringPrice = 1350;
+              break;
+            case 'bravaSlate':
+              roofCoveringPrice = 1650;
+              break;
+            case 'bravaShake':
+              roofCoveringPrice = 1750;
+              break;
+            case 'bravaSBT':
+              roofCoveringPrice = 1950;
+              break;
+            default:
+              roofCoveringPrice = 0;
+          }
+        }
+        // Calculate roof covering total using the new formula
+        let roofCoveringTotal = 0;
+        if (selectedRoofType) {
+          // Base price per square
+          roofCoveringTotal = roofAreaSquares * roofCoveringPrice;
+          
+          // Pitch adjustment: $10/square for each point above 4
+          const pitchAdjustment = Math.max((pitch - 4) * roofAreaSquares * 10, 0);
+          roofCoveringTotal += pitchAdjustment;
+          
+          // Add facets cost
+          roofCoveringTotal += (roofAreaSquares * facets * 5);
+          
+          // Add valleys cost
+          roofCoveringTotal += (valleys * 5);
+          
+          // Add story cost if 3 stories
+          if (stories == 3) {
+            roofCoveringTotal += (roofAreaSquares * 100);
+          }
+        }
+        const roofCoveringTotalElement = document.getElementById('roofCoveringTotal');
+        if (roofCoveringTotalElement) {
+          roofCoveringTotalElement.textContent = formatPrice(roofCoveringTotal);
+        }
 
-      let mobilization = document.getElementById('mobilization').checked ? 1500 : 0;
-      let accessCost = (document.getElementById('accessHandLoad').checked && access === 'Hand Load') ? roofArea * 0.5 : 0;
-      let tearoff1 = document.getElementById('tearoff1').checked ? roofAreaSquares * 110 : 0;
-      let tearoffAdditional = document.getElementById('tearoffAdditional').checked ? roofAreaSquares * Math.max(0, (existingLayers - 1)) * 35 : 0;
-      let roofTypeCost = 0;
-      const roofTypeCheckbox = document.getElementById('roofTypeCheckbox');
-      if (existingType === 'Tile' || existingType === 'Shake') {
-        roofTypeCost = roofAreaSquares * 60;
-        roofTypeCheckbox.checked = true;
-      } else {
-        roofTypeCheckbox.checked = false;
-      }
-      let mobilizationTotal = mobilization + accessCost + tearoff1 + tearoffAdditional + roofTypeCost;
-      document.getElementById('mobilizationTotal').textContent = formatPrice(mobilizationTotal);
-      document.getElementById('roofTypeCost').textContent = formatPrice(roofTypeCost);
+        let mobilization = 1500;
+        let accessCost = 0;
+        const accessHandLoadCheckbox = document.getElementById('accessHandLoad');
+        if (access === 'Hand Load' && accessHandLoadCheckbox) {
+          accessCost = roofArea * 0.5;
+          accessHandLoadCheckbox.checked = true;
+        } else if (accessHandLoadCheckbox) {
+          accessHandLoadCheckbox.checked = false;
+        }
+        
+        const tearoff1Checkbox = document.getElementById('tearoff1');
+        let tearoff1 = tearoff1Checkbox && tearoff1Checkbox.checked ? roofAreaSquares * 110 : 0;
+        
+        let tearoffAdditional = 0;
+        const tearoffAdditionalCheckbox = document.getElementById('tearoffAdditional');
+        if (existingLayers >= 2 && tearoffAdditionalCheckbox) {
+          tearoffAdditional = roofAreaSquares * (existingLayers - 1) * 35;
+          tearoffAdditionalCheckbox.checked = true;
+        } else if (tearoffAdditionalCheckbox) {
+          tearoffAdditionalCheckbox.checked = false;
+        }
+        
+        let roofTypeCost = 0;
+        const roofTypeCheckbox = document.getElementById('roofTypeCheckbox');
+        if ((existingType === 'Tile' || existingType === 'Shake') && roofTypeCheckbox) {
+          roofTypeCost = roofAreaSquares * 60;
+          roofTypeCheckbox.checked = true;
+        } else if (roofTypeCheckbox) {
+          roofTypeCheckbox.checked = false;
+        }
+        let mobilizationTotal = mobilization + accessCost + tearoff1 + tearoffAdditional + roofTypeCost;
+        const mobilizationTotalElement = document.getElementById('mobilizationTotal');
+        if (mobilizationTotalElement) {
+          mobilizationTotalElement.textContent = formatPrice(mobilizationTotal);
+        }
 
-      // Gutters
-      let guttersTotal = 0;
-      if (document.getElementById('guttersDownspouts').checked) {
-        guttersTotal += (eaves * 12) + (downspouts * 10 * 12);
-      }
-      if (document.getElementById('gutters3x4Downspouts').checked) {
-        guttersTotal += (eaves * 16) + (downspouts * 10 * 16);
-      }
-      if (document.getElementById('guttersGuards').checked) {
-        guttersTotal += eaves * 14;
-      }
-      if (document.getElementById('gutters6KGuards').checked) {
-        guttersTotal += eaves * 18;
-      }
-      document.getElementById('guttersTotal').textContent = formatPrice(guttersTotal);
+        // Gutters
+        let guttersTotal = 0;
+        if (document.getElementById('guttersDownspouts').checked) {
+          guttersTotal += (eaves * 12) + (downspouts * 10 * 12);
+        }
+        if (document.getElementById('gutters3x4Downspouts').checked) {
+          guttersTotal += (eaves * 16) + (downspouts * 10 * 16);
+        }
+        if (document.getElementById('guttersGuards').checked) {
+          guttersTotal += eaves * 14;
+        }
+        if (document.getElementById('gutters6KGuards').checked) {
+          guttersTotal += eaves * 18;
+        }
+        const guttersTotalElement = document.getElementById('guttersTotal');
+        if (guttersTotalElement) {
+          guttersTotalElement.textContent = formatPrice(guttersTotal);
+        }
 
-      // Insulation
-      let insulationTotal = 0;
-      // Use attic area in squares, not sqft
-      const atticAreaSquares = roofAreaSquares / (1 + (0.03 * pitch));
-      if (document.getElementById('removeAtticInsulation').checked) {
-        insulationTotal += atticAreaSquares * 0.92 * 250;
-      }
-      if (document.getElementById('blowInInsulation').checked) {
-        insulationTotal += atticAreaSquares * 0.92 * 350;
-      }
-      document.getElementById('insulationTotal').textContent = formatPrice(insulationTotal);
+        // Insulation
+        let insulationTotal = 0;
+        // Use attic area in squares, not sqft
+        const atticAreaSquares = roofAreaSquares / (1 + (0.03 * pitch));
+        if (document.getElementById('removeAtticInsulation').checked) {
+          insulationTotal += atticAreaSquares * 0.92 * 250;
+        }
+        if (document.getElementById('blowInInsulation').checked) {
+          insulationTotal += atticAreaSquares * 0.92 * 350;
+        }
+        const insulationTotalElement = document.getElementById('insulationTotal');
+        if (insulationTotalElement) {
+          insulationTotalElement.textContent = formatPrice(insulationTotal);
+        }
 
-      // Ventilation
-      let ventilationTotal = 0;
-      if (document.getElementById('fixBaffles').checked) {
-        ventilationTotal += eaves * 6;
-      }
-      if (document.getElementById('intakeVentSoffit').checked) {
-        ventilationTotal += eaves * 8;
-      }
-      if (document.getElementById('exhaustVentSoffit').checked) {
-        ventilationTotal += eaves * 22;
-      }
-      document.getElementById('ventilationTotal').textContent = formatPrice(ventilationTotal);
+        // Ventilation
+        let ventilationTotal = 0;
+        if (document.getElementById('fixBaffles').checked) {
+          // Calculate based on eaves, but minimum $400
+          ventilationTotal += Math.min(Math.max(eaves * 6, 400), 400);
+        }
+        if (document.getElementById('intakeVentSoffit').checked) {
+          // Calculate based on eaves, but minimum $600
+          ventilationTotal += Math.min(Math.max(eaves * 8, 600), 600);
+        }
+        if (document.getElementById('exhaustVentSoffit').checked) {
+          // Calculate based on eaves, but minimum $800
+          ventilationTotal += Math.min(Math.max(eaves * 22, 800), 800);
+        }
+        const ventilationTotalElement = document.getElementById('ventilationTotal');
+        if (ventilationTotalElement) {
+          ventilationTotalElement.textContent = formatPrice(ventilationTotal);
+        }
 
-      // Warranty
-      let warrantyTotal = 0;
-      if (document.getElementById('sureStartWarranty').checked) {
-        warrantyTotal -= 80 * roofAreaSquares;
-      }
-      // ORCA 5 year workmanship is $0, so no addition needed
-      document.getElementById('warrantyTotal').textContent = formatPrice(warrantyTotal);
+        // Skylights
+        let skylightsTotal = 0;
+        if (document.getElementById('veluxReplace').checked) {
+          skylightsTotal += skylights * 650;
+        }
+        if (document.getElementById('veluxCustom').checked) {
+          skylightsTotal += skylights * 1800;
+        }
+        if (document.getElementById('veluxReflash').checked) {
+          skylightsTotal += skylights * 250;
+        }
+        const skylightsTotalElement = document.getElementById('skylightsTotal');
+        if (skylightsTotalElement) {
+          skylightsTotalElement.textContent = formatPrice(skylightsTotal);
+        }
 
-      // Carpentry
-      let carpentryTotal = 0;
-      if (document.getElementById('deckingPlywood').checked) {
-        carpentryTotal += (roofArea / 30) * 95;
-      }
-      if (document.getElementById('fasciaBoard').checked) {
-        carpentryTotal += (eaves + rakes) * 18;
-      }
-      if (document.getElementById('trussRepair').checked) {
-        const trussHours = parseFloat(document.getElementById('trussHours').value) || 0;
-        carpentryTotal += trussHours * 95;
-      }
-      document.getElementById('carpentryTotal').textContent = formatPrice(carpentryTotal);
+        // Carpentry
+        let carpentryTotal = 0;
+        if (document.getElementById('deckingPlywood').checked) {
+          carpentryTotal += (roofArea / 30) * 95;
+        }
+        if (document.getElementById('fasciaBoard').checked) {
+          carpentryTotal += (eaves + rakes) * 18;
+        }
+                  if (document.getElementById('trussRepair').checked) {
+            const carpentryHours = parseFloat(document.getElementById('carpentryHours').value) || 0;
+            carpentryTotal += carpentryHours * 95;
+        }
+        const carpentryTotalElement = document.getElementById('carpentryTotal');
+        if (carpentryTotalElement) {
+          carpentryTotalElement.textContent = formatPrice(carpentryTotal);
+        }
 
-      // Other (custom)
-      let otherTotal = 0;
-      otherTotal += parseFloat(document.getElementById('otherCustomPrice1').value) || 0;
-      otherTotal += parseFloat(document.getElementById('otherCustomPrice2').value) || 0;
-      otherTotal += parseFloat(document.getElementById('otherCustomPrice3').value) || 0;
-      document.getElementById('otherTotal').textContent = formatPrice(otherTotal);
+        // Other (custom)
+        let otherTotal = 0;
+        otherTotal += parseFloat(document.getElementById('otherCustomPrice1').value) || 0;
+        otherTotal += parseFloat(document.getElementById('otherCustomPrice2').value) || 0;
+        otherTotal += parseFloat(document.getElementById('otherCustomPrice3').value) || 0;
+        const otherTotalElement = document.getElementById('otherTotal');
+        if (otherTotalElement) {
+          otherTotalElement.textContent = formatPrice(otherTotal);
+        }
 
-      // Add up all section totals for final cost
-      const sectionTotals = [mobilizationTotal, roofCoveringTotal, guttersTotal, insulationTotal, ventilationTotal, warrantyTotal, carpentryTotal, otherTotal];
-      const totalCost = sectionTotals.reduce((a, b) => a + b, 0);
-      const monthlyPayment = totalCost * 0.0132;
-      const summaryDetails = document.querySelector('.summary-details');
-      const totalContainer = document.querySelector('.total-container');
-      summaryDetails.innerHTML = `
-        <p class="summary-item"><strong>Total Roof Area:</strong> <span class="value">${roofArea} SF</span></p>
-      `;
-      totalContainer.innerHTML = `
-        <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">${formatPrice(totalCost)}</span></p>
-        <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">${formatPrice(monthlyPayment)}</span></p>
-      `;
+        // Add up all section totals for final cost
+        const sectionTotals = [mobilizationTotal, roofCoveringTotal, guttersTotal, insulationTotal, ventilationTotal, skylightsTotal, carpentryTotal, otherTotal];
+        const totalCost = sectionTotals.reduce((a, b) => a + b, 0);
+        // Update monthly payment calculation: $11.375 per $1000
+        const monthlyPayment = (totalCost / 1000) * 11.375;
+        const summaryDetails = document.querySelector('.summary-details');
+        const totalContainer = document.querySelector('.total-container');
+        
+        // Format roof area with commas for thousands
+        const formattedRoofArea = roofArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        
+        summaryDetails.innerHTML = `
+          <p class="summary-item"><strong>Total Roof Area:</strong> <span class="value">${formattedRoofArea} SF</span></p>
+        `;
+        totalContainer.innerHTML = `
+          <p class="total-cost"><strong>Total Estimated Cost:</strong> <span class="value">${formatPrice(totalCost)}</span></p>
+          <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">${formatPrice(monthlyPayment)}</span></p>
+        `;
+      } catch (err) {
+        console.error('Error in calculateTotal:', err);
+      }
     }
     function getSelectedRadioPrice(name) {
       const selected = document.querySelector(`input[name="${name}"]:checked`);
