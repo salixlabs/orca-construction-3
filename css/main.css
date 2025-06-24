@@ -217,6 +217,17 @@ input[type="number"] {
     height: 16px;
 }
 
+/* Style for disabled (auto-checked) checkboxes */
+input[type="checkbox"]:disabled {
+    accent-color: rgba(59, 130, 246, 0.6) !important;
+    opacity: 1 !important;
+}
+
+input[type="checkbox"]:disabled + span {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
 .radio-label span,
 .checkbox-label span {
     font-size: 14px;
