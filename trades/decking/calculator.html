@@ -410,7 +410,7 @@
                     <p class="monthly-payment"><strong>Monthly Payment*:</strong> <span class="value">$0.00</span></p>
                 </div>
             </div>
-            <p class="financing-disclaimer">*$0 down, 10 year term, 8.99% interest. Subject to approval.</p>
+            <p class="financing-disclaimer">*$0 down, 12 year term, 8.99% interest. Subject to approval.</p>
         </div>
     </div>
 
@@ -530,7 +530,7 @@
         function updateCostBreakdown(firstFloorSF, secondFloorSF, railingLF, steps, 
                                    firstLevelTotal, secondLevelTotal, railingsTotal, optionsTotal) {
             const totalCost = firstLevelTotal + secondLevelTotal + railingsTotal + optionsTotal;
-            const monthlyPayment = totalCost * 0.0127;
+            const monthlyPayment = totalCost * 0.011375;
             const summaryDetails = document.querySelector('.summary-details');
             const totalContainer = document.querySelector('.total-container');
 
