@@ -204,6 +204,41 @@
         .custom-price::placeholder {
             color: #999;
         }
+
+        .multiplier-select {
+            display: inline-block;
+            margin-left: 4px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            min-width: 40px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: none;
+            text-decoration: none;
+        }
+
+        .multiplier-select:hover {
+            color: var(--primary-dark);
+        }
+
+        .multiplier-select:focus {
+            outline: none;
+            color: var(--primary-dark);
+        }
+
+        .multiplier-select option {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 4px;
+            background-color: white;
+            color: var(--primary-dark);
+        }
     </style>
     <script>
         // Check if logged in
@@ -220,7 +255,27 @@
                     <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
                 </a>
             </div>
-            <h1>Deck Calculator</h1>
+            <h1>Deck Calculator 
+                <select id="multiplier" class="multiplier-select" onchange="updateMultiplier()">
+                    <option value="1.0">1.0</option>
+                    <option value="1.1" selected>1.1</option>
+                    <option value="1.2">1.2</option>
+                    <option value="1.3">1.3</option>
+                    <option value="1.4">1.4</option>
+                    <option value="1.5">1.5</option>
+                    <option value="1.6">1.6</option>
+                    <option value="1.7">1.7</option>
+                    <option value="1.8">1.8</option>
+                    <option value="1.9">1.9</option>
+                    <option value="2.0">2.0</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3.0">3.0</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4.0">4.0</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5.0">5.0</option>
+                </select>
+            </h1>
             <button class="reset-button" onclick="resetCalculator()">Reset</button>
         </header>
         
@@ -433,17 +488,20 @@
             const railingLF = parseFloat(document.getElementById('railingLF').value) || 0;
             const steps = parseFloat(document.getElementById('steps').value) || 0;
 
+            // Get multiplier
+            const multiplier = parseFloat(document.getElementById('multiplier').value) || 1.0;
+
             // Get selected options and their prices
             let firstLevelPrice = getSelectedRadioPrice('firstLevel');
             let secondLevelPrice = getSelectedRadioPrice('secondLevel');
             let railingPrice = getSelectedRadioPrice('railing');
 
-            // Calculate section totals
-            let firstLevelTotal = firstFloorSF * firstLevelPrice;
-            let secondLevelTotal = secondFloorSF * secondLevelPrice;
-            let railingsTotal = railingLF * railingPrice;
-            let optionsTotal = calculateOptionsTotal(firstFloorSF, secondFloorSF, steps);
-            let additionalOptionsTotal = calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF);
+            // Calculate section totals with multiplier applied
+            let firstLevelTotal = firstFloorSF * firstLevelPrice * multiplier;
+            let secondLevelTotal = secondFloorSF * secondLevelPrice * multiplier;
+            let railingsTotal = railingLF * railingPrice * multiplier;
+            let optionsTotal = calculateOptionsTotal(firstFloorSF, secondFloorSF, steps, multiplier);
+            let additionalOptionsTotal = calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF, multiplier);
 
             // Update section totals
             document.getElementById('firstLevelTotal').textContent = formatPrice(firstLevelTotal);
@@ -462,65 +520,65 @@
             return selected ? parseFloat(selected.dataset.price) : 0;
         }
 
-        function calculateOptionsTotal(firstFloorSF, secondFloorSF, steps) {
+        function calculateOptionsTotal(firstFloorSF, secondFloorSF, steps, multiplier) {
             let total = 0;
 
             // Ground Level Framing
             if (document.getElementById('pressureTreated').checked) {
-                total += firstFloorSF * 29;
+                total += firstFloorSF * 29 * multiplier;
             }
 
             // Second Story Framing
             if (document.getElementById('secondStoryFraming').checked) {
-                total += secondFloorSF * 42;
+                total += secondFloorSF * 42 * multiplier;
             }
 
             // Stairs
             if (document.getElementById('stairs').checked) {
-                total += steps * 281;
+                total += steps * 281 * multiplier;
             }
 
             // Demo and Dump Fee
             if (document.getElementById('dumpFee').checked) {
-                total += (firstFloorSF + secondFloorSF) * 7;
+                total += (firstFloorSF + secondFloorSF) * 7 * multiplier;
             }
 
             // Water Catch System
             if (document.getElementById('rainEscape').checked) {
-                total += (firstFloorSF + secondFloorSF) * 31;
+                total += (firstFloorSF + secondFloorSF) * 31 * multiplier;
             }
 
             // Permits
             if (document.getElementById('permits').checked) {
-                total += 4400;
+                total += 4400 * multiplier;
             }
 
-            // Custom Option (Framing)
+            // Custom Option (Framing) - not multiplied
             const customPrice = parseFloat(document.querySelector('.custom-price').value) || 0;
             total += customPrice;
 
             return total;
         }
 
-        function calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF) {
+        function calculateAdditionalOptionsTotal(firstFloorSF, secondFloorSF, railingLF, multiplier) {
             let total = 0;
             const totalSF = firstFloorSF + secondFloorSF;
 
             // Paint/Stain options
             if (document.getElementById('paintDeck').checked) {
-                total += totalSF * 23;
+                total += totalSF * 23 * multiplier;
             }
             if (document.getElementById('paintRailings').checked) {
-                total += railingLF * 29;
+                total += railingLF * 29 * multiplier;
             }
             if (document.getElementById('cableHardware').checked) {
-                total += railingLF * 33;
+                total += railingLF * 33 * multiplier;
             }
             if (document.getElementById('cableRods').checked) {
-                total += railingLF * 50;
+                total += railingLF * 50 * multiplier;
             }
 
-            // Custom Option (Additional Options)
+            // Custom Option (Additional Options) - not multiplied
             const additionalCustomPrice = parseFloat(document.getElementById('additionalCustomPrice').value) || 0;
             total += additionalCustomPrice;
 
@@ -550,6 +608,11 @@
             return '$' + price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
+        function updateMultiplier() {
+            // Recalculate totals when multiplier changes
+            calculateTotal();
+        }
+
         function resetCalculator() {
             // Reset all inputs
             document.querySelectorAll('input[type="number"]').forEach(input => {
@@ -561,6 +624,9 @@
             document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
                 checkbox.checked = false;
             });
+
+            // Reset multiplier to default
+            document.getElementById('multiplier').value = '1.1';
 
             // Recalculate totals
             calculateTotal();
