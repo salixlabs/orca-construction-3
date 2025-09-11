@@ -207,7 +207,7 @@
 
         .multiplier-select {
             display: inline-block;
-            margin-left: 4px;
+            margin-left: 0px;
             padding: 0;
             border: none;
             background: transparent;
@@ -215,7 +215,7 @@
             font-size: 24px;
             font-weight: bold;
             cursor: pointer;
-            min-width: 40px;
+            min-width: 50px;
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -257,23 +257,23 @@
             </div>
             <h1>Deck Calculator 
                 <select id="multiplier" class="multiplier-select" onchange="updateMultiplier()">
-                    <option value="1.0">1.0</option>
-                    <option value="1.1" selected>1.1</option>
-                    <option value="1.2">1.2</option>
-                    <option value="1.3">1.3</option>
-                    <option value="1.4">1.4</option>
-                    <option value="1.5">1.5</option>
-                    <option value="1.6">1.6</option>
-                    <option value="1.7">1.7</option>
-                    <option value="1.8">1.8</option>
-                    <option value="1.9">1.9</option>
-                    <option value="2.0">2.0</option>
-                    <option value="2.5">2.5</option>
-                    <option value="3.0">3.0</option>
-                    <option value="3.5">3.5</option>
-                    <option value="4.0">4.0</option>
-                    <option value="4.5">4.5</option>
-                    <option value="5.0">5.0</option>
+                    <option value="1.0">v1.0</option>
+                    <option value="1.1" selected>v1.1</option>
+                    <option value="1.2">v1.2</option>
+                    <option value="1.3">v1.3</option>
+                    <option value="1.4">v1.4</option>
+                    <option value="1.5">v1.5</option>
+                    <option value="1.6">v1.6</option>
+                    <option value="1.7">v1.7</option>
+                    <option value="1.8">v1.8</option>
+                    <option value="1.9">v1.9</option>
+                    <option value="2.0">v2.0</option>
+                    <option value="2.5">v2.5</option>
+                    <option value="3.0">v3.0</option>
+                    <option value="3.5">v3.5</option>
+                    <option value="4.0">v4.0</option>
+                    <option value="4.5">v4.5</option>
+                    <option value="5.0">v5.0</option>
                 </select>
             </h1>
             <button class="reset-button" onclick="resetCalculator()">Reset</button>
@@ -422,8 +422,8 @@
                     <h2>Additional Options <span class="section-total" id="additionalOptionsTotal">$0.00</span></h2>
                     <div class="form-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" id="paintDeck" data-price="23">
-                            <span>Paint/Stain Deck ($23/SF)</span>
+                            <input type="checkbox" id="paintDeck" data-price="33">
+                            <span>Paint/Stain Deck ($33/SF)</span>
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" id="paintRailings" data-price="29">
@@ -566,7 +566,7 @@
 
             // Paint/Stain options
             if (document.getElementById('paintDeck').checked) {
-                total += totalSF * 23 * multiplier;
+                total += totalSF * 33 * multiplier;
             }
             if (document.getElementById('paintRailings').checked) {
                 total += railingLF * 29 * multiplier;
