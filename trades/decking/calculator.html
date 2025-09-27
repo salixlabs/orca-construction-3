@@ -258,8 +258,8 @@
             <h1>Deck Calculator 
                 <select id="multiplier" class="multiplier-select" onchange="updateMultiplier()">
                     <option value="1.0">v1.0</option>
-                    <option value="1.1" selected>v1.1</option>
-                    <option value="1.2">v1.2</option>
+                    <option value="1.1">v1.1</option>
+                    <option value="1.2" selected>v1.2</option>
                     <option value="1.3">v1.3</option>
                     <option value="1.4">v1.4</option>
                     <option value="1.5">v1.5</option>
@@ -477,7 +477,8 @@
                 input.addEventListener('change', calculateTotal);
             });
 
-            // Initial calculation
+            // Initial price display update and calculation
+            updatePriceDisplays();
             calculateTotal();
         });
 
@@ -605,12 +606,66 @@
         }
 
         function formatPrice(price) {
-            return '$' + price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return '$' + Math.round(price).toLocaleString();
         }
 
         function updateMultiplier() {
+            // Update price displays in parentheses
+            updatePriceDisplays();
             // Recalculate totals when multiplier changes
             calculateTotal();
+        }
+
+        function updatePriceDisplays() {
+            const multiplier = parseFloat(document.getElementById('multiplier').value) || 1.0;
+            
+            // Update all radio button price displays
+            document.querySelectorAll('input[type="radio"][data-price]').forEach(radio => {
+                const basePrice = parseFloat(radio.dataset.price);
+                const adjustedPrice = basePrice * multiplier;
+                const span = radio.parentElement.querySelector('span');
+                if (span) {
+                    // Extract the unit (SF, LF, each) from the current text
+                    const currentText = span.textContent;
+                    const unitMatch = currentText.match(/(\$[0-9,]+(?:\.\d{2})?)\/([A-Z]+)/);
+                    if (unitMatch) {
+                        const unit = unitMatch[2];
+                        const formattedPrice = formatPrice(adjustedPrice);
+                        span.textContent = currentText.replace(unitMatch[1], formattedPrice);
+                    }
+                }
+            });
+            
+            // Update all checkbox price displays
+            document.querySelectorAll('input[type="checkbox"][data-price]').forEach(checkbox => {
+                const basePrice = parseFloat(checkbox.dataset.price);
+                const adjustedPrice = basePrice * multiplier;
+                const span = checkbox.parentElement.querySelector('span');
+                if (span) {
+                    // Extract the unit (SF, LF, each) from the current text
+                    const currentText = span.textContent;
+                    const unitMatch = currentText.match(/(\$[0-9,]+(?:\.\d{2})?)\/([A-Z]+)/);
+                    if (unitMatch) {
+                        const unit = unitMatch[2];
+                        const formattedPrice = formatPrice(adjustedPrice);
+                        span.textContent = currentText.replace(unitMatch[1], formattedPrice);
+                    } else {
+                        // Handle "each" case (like Stairs)
+                        const eachMatch = currentText.match(/(\$[0-9,]+(?:\.\d{2})?)\s+(each)/);
+                        if (eachMatch) {
+                            const formattedPrice = formatPrice(adjustedPrice);
+                            span.textContent = currentText.replace(eachMatch[1], formattedPrice);
+                        } else {
+                            // Handle fixed amounts (like Plans & Permits)
+                            const fixedMatch = currentText.match(/(\$[0-9,]+(?:\.\d{2})?)/);
+                            if (fixedMatch) {
+                                const formattedPrice = formatPrice(adjustedPrice);
+                                span.textContent = currentText.replace(fixedMatch[1], formattedPrice);
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         function resetCalculator() {
@@ -625,8 +680,7 @@
                 checkbox.checked = false;
             });
 
-            // Reset multiplier to default
-            document.getElementById('multiplier').value = '1.1';
+            // Keep current multiplier selection (don't reset it)
 
             // Recalculate totals
             calculateTotal();
