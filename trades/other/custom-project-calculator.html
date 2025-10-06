@@ -503,7 +503,6 @@
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
             doc.text(`Estimated Project Duration: ${formatDays(totalDays)} days`, 25, 80);
-            doc.text(`Total Labor Hours: ${formatNumber(totalHours)} hours`, 25, 90);
             
             // Total Price
             doc.setFillColor(...primaryColor);
@@ -523,8 +522,15 @@
             doc.text('For questions or to schedule this project, please contact us.', 20, 160);
             doc.text('Thank you for choosing Orca Roofing & Exteriors!', 20, 170);
             
-            // Save the PDF
-            doc.save(`Orca-Project-Quote-${today.replace(/\//g, '-')}.pdf`);
+            // Open PDF in new browser tab
+            const pdfBlob = doc.output('blob');
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            window.open(pdfUrl, '_blank');
+            
+            // Clean up the URL after a short delay
+            setTimeout(() => {
+                URL.revokeObjectURL(pdfUrl);
+            }, 1000);
         }
         
         function formatCurrency(amount) {
