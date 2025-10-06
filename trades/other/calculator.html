@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Trades - Specialized Calculators</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        } else {
+            // Show the container when logged in
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.container').style.display = 'grid';
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <div class="content-header">
+            <a href="index.html">
+                <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+            </a>
+            <h1>Specialized Calculators</h1>
+        </div>
+
+        <div class="button-grid">
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>Electrical Calculator</h2>
+                <p>Calculate electrical requirements and materials</p>
+            </div>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>Plumbing Calculator</h2>
+                <p>Estimate plumbing materials and labor costs</p>
+            </div>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>HVAC Calculator</h2>
+                <p>Calculate heating and cooling requirements</p>
+            </div>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>Insulation Calculator</h2>
+                <p>Determine insulation needs and materials</p>
+            </div>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>Drywall Calculator</h2>
+                <p>Calculate drywall sheets and finishing materials</p>
+            </div>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>Paint Calculator</h2>
+                <p>Estimate paint quantities and coverage</p>
+            </div>
+        </div>
+
+        <div class="section" style="margin-top: 2rem; text-align: center; padding: 2rem;">
+            <h2>More Calculators Coming Soon</h2>
+            <p>We're continuously adding new specialized calculators for various construction trades. Check back regularly for updates!</p>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

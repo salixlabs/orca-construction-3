@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Project Calculator</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <style>
+        .cost-summary {
+            background-color: #e5dacc;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .cost-summary-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: center;
+            border: none;
+        }
+
+        .summary-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .whale-tail {
+            width: 100%;
+            height: 100%;
+            background-image: url('../../Assets/logo/ORE-tail.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15;
+        }
+
+        .total-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .summary-item {
+            margin: 12px 0;
+            font-size: 24px;
+            color: var(--primary-dark);
+            width: 100%;
+        }
+
+        .summary-item strong {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .summary-item .value {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .total-cost {
+            font-size: 24px;
+            color: var(--primary-dark);
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+            width: 100%;
+        }
+
+        .total-cost strong {
+            font-weight: 600;
+            margin-right: 8px;
+            border-top: none;
+        }
+
+        .total-cost .value {
+            color: var(--primary-gold);
+            font-weight: 600;
+            border-top: none;
+        }
+
+        .cost-summary-header {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .margin-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .margin-option {
+            background: #f8f6f3;
+            border: 2px solid #e5dacc;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .margin-option:hover {
+            border-color: var(--primary-gold);
+            background: #f5f3f0;
+        }
+
+        .margin-option.selected {
+            border-color: var(--primary-gold);
+            background: var(--primary-gold);
+            color: white;
+        }
+
+        .margin-option h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+        }
+
+        .margin-option .price {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .margin-option.selected .price {
+            color: white;
+        }
+
+        .margin-option .margin-percent {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .margin-option.selected .margin-percent {
+            color: white;
+        }
+
+        .input-highlight {
+            background-color: #fff3cd !important;
+            border-color: #ffeaa7 !important;
+        }
+
+        .quote-button {
+            background-color: var(--primary-gold);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quote-button:hover {
+            background-color: #b39871;
+        }
+
+        .quote-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Override header logo size */
+        .logo img {
+            max-width: 120px !important;
+            width: 120px !important;
+        }
+
+        /* iPad optimization */
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-layout {
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .section h2 {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            
+            .form-group {
+                margin-bottom: 12px;
+            }
+            
+            .cost-summary {
+                padding: 20px;
+                margin-top: 15px;
+            }
+            
+            .cost-summary-header {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .margin-options {
+                gap: 12px;
+            }
+            
+            .margin-option {
+                padding: 12px;
+            }
+            
+            .margin-option h3 {
+                font-size: 16px;
+            }
+            
+            .margin-option .price {
+                font-size: 18px;
+            }
+            
+            .summary-item {
+                font-size: 20px;
+                margin: 8px 0;
+            }
+            
+            .total-cost {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cost-summary-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .summary-details,
+            .total-container {
+                padding: 0;
+                margin: 0 auto;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .logo-container {
+                width: 60px;
+                height: 60px;
+                margin: 0 auto;
+            }
+
+            .margin-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+                </a>
+            </div>
+            <h1>Custom Project Calculator</h1>
+            <button class="reset-button" onclick="resetCalculator()">Reset</button>
+        </header>
+        
+        
+        <div class="main-layout">
+            <div class="left-column">
+                <div class="section">
+                    <h2>Labor</h2>
+                    <div class="form-group">
+                        <label for="foremanDays">Foreman - Days:</label>
+                        <input type="number" id="foremanDays" class="input-highlight" min="0" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="helper1Days">Helper 1 - Days:</label>
+                        <input type="number" id="helper1Days" class="input-highlight" min="0" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="helper2Days">Helper 2 - Days:</label>
+                        <input type="number" id="helper2Days" class="input-highlight" min="0" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Labor Days:</label>
+                        <div id="totalLaborDays" class="section-total">0</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Labor Hours:</label>
+                        <div id="totalLaborHours" class="section-total">0</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Labor Cost:</label>
+                        <div id="totalLaborCost" class="section-total">$0.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="section">
+                    <h2>Materials</h2>
+                    <div class="form-group">
+                        <label for="materialsCost">Estimated Materials Cost:</label>
+                        <input type="number" id="materialsCost" class="input-highlight" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Project Management</h2>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="smallProject" data-cost="1000">
+                            <span>Small Project ($1,000)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="mediumProject" data-cost="2000">
+                            <span>Medium Project ($2,000)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="bigProject" data-cost="4000">
+                            <span>Big Project ($4,000)</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Project Management:</label>
+                        <div id="totalProjectManagement" class="section-total">$0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section cost-summary">
+            <h2 class="cost-summary-header">Total Cost of Goods Sold</h2>
+            <div class="cost-summary-grid">
+                <div class="summary-details">
+                    <p class="summary-item"><strong>Labor Cost:</strong> <span class="value" id="displayLaborCost">$0.00</span></p>
+                    <p class="summary-item"><strong>Materials Cost:</strong> <span class="value" id="displayMaterialsCost">$0.00</span></p>
+                    <p class="summary-item"><strong>Project Management:</strong> <span class="value" id="displayProjectManagement">$0.00</span></p>
+                </div>
+                <div class="logo-container">
+                    <div class="whale-tail"></div>
+                </div>
+                <div class="total-container">
+                    <p class="total-cost"><strong>Total COGS:</strong> <span class="value" id="totalCOGS">$0.00</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section cost-summary">
+            <h2 class="cost-summary-header">Margin Goal / Customer Price</h2>
+            <div class="margin-options">
+                <div class="margin-option" data-margin="0.40" onclick="selectMargin(0.40)">
+                    <h3>40% Margin</h3>
+                    <div class="price" id="price40">$0.00</div>
+                    <div class="margin-percent">40% profit margin</div>
+                </div>
+                <div class="margin-option" data-margin="0.50" onclick="selectMargin(0.50)">
+                    <h3>50% Margin</h3>
+                    <div class="price" id="price50">$0.00</div>
+                    <div class="margin-percent">50% profit margin</div>
+                </div>
+                <div class="margin-option selected" data-margin="0.60" onclick="selectMargin(0.60)">
+                    <h3>60% Margin</h3>
+                    <div class="price" id="price60">$0.00</div>
+                    <div class="margin-percent">60% profit margin</div>
+                </div>
+                <div class="margin-option" data-margin="0.70" onclick="selectMargin(0.70)">
+                    <h3>70% Margin</h3>
+                    <div class="price" id="price70">$0.00</div>
+                    <div class="margin-percent">70% profit margin</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; font-style: italic; color: #666;">
+                The more complicated or custom the job, the higher the margin % should be!
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center; margin-top: 20px;">
+            <button id="generateQuoteBtn" class="quote-button" onclick="generateQuote()">
+                Generate Customer Quote PDF
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="custom-project-calculator.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+
+        function generateQuote() {
+            // Get current values
+            const foremanDays = parseFloat(document.getElementById('foremanDays').value) || 0;
+            const helper1Days = parseFloat(document.getElementById('helper1Days').value) || 0;
+            const helper2Days = parseFloat(document.getElementById('helper2Days').value) || 0;
+            const materialsCost = parseFloat(document.getElementById('materialsCost').value) || 0;
+            
+            // Calculate totals
+            const totalDays = foremanDays + helper1Days + helper2Days;
+            const totalHours = (foremanDays + helper1Days + helper2Days) * 8;
+            
+            // Get selected margin and calculate customer price
+            const selectedMarginElement = document.querySelector('.margin-option.selected');
+            const margin = parseFloat(selectedMarginElement.dataset.margin);
+            const customerPrice = parseFloat(selectedMarginElement.querySelector('.price').textContent.replace(/[$,]/g, ''));
+            
+            // Get project management cost
+            let projectManagementCost = 0;
+            if (document.getElementById('smallProject').checked) projectManagementCost = 1000;
+            if (document.getElementById('mediumProject').checked) projectManagementCost = 2000;
+            if (document.getElementById('bigProject').checked) projectManagementCost = 4000;
+            
+            // Create PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set up fonts and colors
+            const primaryColor = [196, 167, 125]; // #c4a77d
+            const darkColor = [51, 51, 51]; // #333333
+            
+            // Header
+            doc.setFillColor(...primaryColor);
+            doc.rect(0, 0, 210, 40, 'F');
+            
+            // Add logo
+            try {
+                const logoImg = new Image();
+                logoImg.crossOrigin = 'anonymous';
+                logoImg.onload = function() {
+                    doc.addImage(logoImg, 'PNG', 20, 8, 40, 24);
+                };
+                logoImg.src = '../../Assets/logo/ORE-horizontal-full.png';
+            } catch (e) {
+                // Fallback to text if logo fails to load
+                doc.setFillColor(255, 255, 255);
+                doc.rect(20, 10, 30, 20, 'F');
+                doc.setTextColor(...darkColor);
+                doc.setFontSize(12);
+                doc.text('ORCA', 25, 22);
+                doc.text('ROOFING & EXTERIORS', 25, 28);
+            }
+            
+            // Title
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.text('PROJECT QUOTE', 120, 25);
+            
+            // Date
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            const today = new Date().toLocaleDateString();
+            doc.text(`Date: ${today}`, 120, 35);
+            
+            // Project Details Section
+            doc.setFillColor(245, 243, 240); // Light background
+            doc.rect(20, 50, 170, 40, 'F');
+            
+            doc.setTextColor(...darkColor);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('PROJECT DETAILS', 25, 65);
+            
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Estimated Project Duration: ${formatDays(totalDays)} days`, 25, 80);
+            doc.text(`Total Labor Hours: ${formatNumber(totalHours)} hours`, 25, 90);
+            
+            // Total Price
+            doc.setFillColor(...primaryColor);
+            doc.rect(20, 100, 170, 30, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text('TOTAL PROJECT COST', 25, 115);
+            doc.text(formatCurrency(customerPrice), 150, 115);
+            
+            // Footer
+            doc.setTextColor(...darkColor);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('This quote is valid for 30 days from the date above.', 20, 150);
+            doc.text('For questions or to schedule this project, please contact us.', 20, 160);
+            doc.text('Thank you for choosing Orca Roofing & Exteriors!', 20, 170);
+            
+            // Save the PDF
+            doc.save(`Orca-Project-Quote-${today.replace(/\//g, '-')}.pdf`);
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        }
+        
+        function formatDays(number) {
+            return new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 1
+            }).format(number);
+        }
+        
+        function formatNumber(number) {
+            return new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(number);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orca Construction - Other Trades</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <script>
+        // Check if logged in
+        if (localStorage.getItem('orcaLoggedIn') !== 'true') {
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="logout-button" onclick="logout()">Logout</button>
+        <div class="content-header">
+            <a href="../../index.html">
+                <img src="../../Assets/logo/ORE-horizontal-full.png" alt="Orca Roofing & Exteriors Logo">
+            </a>
+            <h1>Other Trades</h1>
+        </div>
+        <div class="button-grid">
+            <a href="custom-project-calculator.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Custom Project Calculator">
+                <h2>Custom Project Calculator</h2>
+                <p>Calculate labor, materials, and pricing for custom projects</p>
+            </a>
+            <a href="calculator.html" class="nav-button">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Specialized Calculators">
+                <h2>Specialized Calculators</h2>
+                <p>Access calculators for various construction trades and specialties</p>
+            </a>
+            <div class="nav-button" style="opacity: 0.5; cursor: default;">
+                <img src="../../Assets/logo/ORE-tail.png" alt="Coming Soon">
+                <h2>More Tools</h2>
+                <p>Additional trade-specific tools and calculators coming soon</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('orcaLoggedIn');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>
