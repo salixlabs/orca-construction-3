@@ -12,7 +12,8 @@ const LABOR_RATES = {
 const HOURS_PER_DAY = 8;
 
 // Current selected margin
-let selectedMargin = 0.60; // Default to 60%
+let selectedMargin = 0.55; // Default to 55%
+window.selectedMargin = selectedMargin; // Make globally accessible
 
 // Helper function to format currency
 function formatCurrency(amount) {
@@ -108,7 +109,7 @@ function calculateTotalCOGS() {
 
 // Calculate customer prices for different margins
 function calculateCustomerPrices(totalCOGS) {
-    const margins = [0.40, 0.50, 0.60, 0.70];
+    const margins = [0.45, 0.55, 0.65];
     
     margins.forEach(margin => {
         // Formula: Customer Price = Total COGS / (1 - Margin Percentage)
@@ -119,14 +120,31 @@ function calculateCustomerPrices(totalCOGS) {
 
 // Select margin option
 function selectMargin(margin) {
+    console.log('selectMargin called with:', margin);
     selectedMargin = margin;
+    window.selectedMargin = margin; // Update global variable
     
     // Update visual selection
     document.querySelectorAll('.margin-option').forEach(option => {
         option.classList.remove('selected');
+        console.log('Removed selected from:', option.dataset.margin);
     });
-    document.querySelector(`[data-margin="${margin}"]`).classList.add('selected');
+    
+    // Format margin to match HTML data attributes (0.60, not 0.6)
+    const formattedMargin = margin.toFixed(2);
+    const targetElement = document.querySelector(`[data-margin="${formattedMargin}"]`);
+    console.log('Looking for element with data-margin:', formattedMargin);
+    console.log('Target element found:', targetElement);
+    
+    if (targetElement) {
+        targetElement.classList.add('selected');
+        console.log('Added selected class to:', formattedMargin);
+    } else {
+        console.error('Could not find element with data-margin:', formattedMargin);
+    }
 }
+
+// selectMargin function is now used internally via event listeners
 
 // Main calculation function
 function calculateTotal() {
@@ -141,6 +159,15 @@ function initializeCalculator() {
     inputs.forEach(input => {
         input.addEventListener('input', calculateTotal);
         input.addEventListener('change', calculateTotal);
+    });
+    
+    // Add event listeners to margin options
+    const marginOptions = document.querySelectorAll('.margin-option');
+    marginOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const margin = parseFloat(this.dataset.margin);
+            selectMargin(margin);
+        });
     });
     
     // Initial calculation
@@ -160,7 +187,7 @@ function resetCalculator() {
     });
     
     // Reset margin selection to default
-    selectMargin(0.60);
+    selectMargin(0.55);
     
     // Recalculate
     calculateTotal();
@@ -169,4 +196,9 @@ function resetCalculator() {
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     initializeCalculator();
+    
+    // Ensure 55% margin is selected by default
+    setTimeout(() => {
+        selectMargin(0.55);
+    }, 200);
 });
