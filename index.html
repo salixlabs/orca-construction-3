@@ -63,6 +63,101 @@
         .login-form button:hover {
             background-color: #b39871;
         }
+
+        /* Responsive styles for the trades container */
+        #calculatorContainer {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            #calculatorContainer {
+                padding: 15px;
+            }
+            
+            .content-header img {
+                width: 200px;
+                height: auto;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 16px;
+            }
+            
+            .nav-button {
+                padding: 24px;
+            }
+            
+            .nav-button img {
+                width: 48px;
+                margin-bottom: 12px;
+            }
+            
+            .nav-button h2 {
+                font-size: 18px;
+            }
+            
+            .nav-button p {
+                font-size: 13px;
+            }
+            
+            .logout-button {
+                top: 12px;
+                right: 12px;
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #calculatorContainer {
+                padding: 12px;
+            }
+            
+            .content-header img {
+                width: 160px;
+            }
+            
+            .button-grid {
+                gap: 12px;
+                padding: 12px;
+            }
+            
+            .nav-button {
+                padding: 20px;
+            }
+            
+            .nav-button img {
+                width: 40px;
+                margin-bottom: 10px;
+            }
+            
+            .nav-button h2 {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+            
+            .nav-button p {
+                font-size: 12px;
+            }
+            
+            .logout-button {
+                top: 8px;
+                right: 8px;
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
